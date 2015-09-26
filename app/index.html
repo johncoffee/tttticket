@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="assets/app.css"/>
   </head>
 
-  <body ng-app="starterApp" layout="row" ng-controller="UserController as ul">
-
+      <body ng-app="app" layout="row" ng-controller="UserController as ul">
+    
+      
+      
   <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
                 md-component-id="left"
                 md-is-locked-open="$mdMedia('gt-sm')">
@@ -33,7 +35,7 @@
 
 
   <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
-
+      
     <md-toolbar layout="row" class="md-whiteframe-z1">
       <md-button class="menu" hide-gt-sm ng-click="ul.toggleList()" aria-label="Show User List">
         <md-icon md-svg-icon="menu" ></md-icon>
@@ -54,37 +56,16 @@
 
   </div>
 
-    <script src="./bower_components/angular/angular.js"></script>
-    <script src="./bower_components/angular-animate/angular-animate.js"></script>
-    <script src="./bower_components/angular-aria/angular-aria.js"></script>
-    <script type="text/javascript" src="./bower_components/angular-material/angular-material.js"></script>
+<script src="./bower_components/angular/angular.js"></script>
+<script src="./bower_components/angular-animate/angular-animate.js"></script>
+<script src="./bower_components/angular-aria/angular-aria.js"></script>
+<script src="./bower_components/angular-material/angular-material.js"></script>
+<script src="./bower_components/angular-route/angular-route.js"></script>
 
-    <script src="./src/users/Users.js"></script>
-    <script src="./src/users/UserController.js"></script>
-    <script src="./src/users/UserService.js"></script>
-
-    <script type="text/javascript">
-
-          angular
-              .module('app', ['ngMaterial', 'ngRoute'])
-              .config(function($mdThemingProvider, $mdIconProvider){
-
-                  $mdIconProvider
-                      .defaultIconSet("./assets/svg/avatars.svg", 128)
-                      .icon("menu"       , "./assets/svg/menu.svg"        , 24)
-                      .icon("share"      , "./assets/svg/share.svg"       , 24)
-                      .icon("google_plus", "./assets/svg/google_plus.svg" , 512)
-                      .icon("hangouts"   , "./assets/svg/hangouts.svg"    , 512)
-                      .icon("twitter"    , "./assets/svg/twitter.svg"     , 512)
-                      .icon("phone"      , "./assets/svg/phone.svg"       , 512);
-
-                      $mdThemingProvider.theme('default')
-                          .primaryPalette('brown')
-                          .accentPalette('red');
-
-              });
-
-    </script>
-
-  </body>
+<script src="app.js"></script>
+<script src="./src/users/Users.js"></script>
+<script src="./src/users/UserController.js"></script>
+<script src="./src/users/UserService.js"></script>
+      
+</body>
 </html>
