@@ -41,8 +41,15 @@
           </md-button>
           <h1>Angular Material - Starter App</h1>
       </md-toolbar>
+        
     
       <md-content flex id="content">
+            <h1>View</h1>
+          
+          <div ng-view></div>
+          
+          <p><hr></p>
+          
           <md-icon md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>
           <h2>{{ul.selected.name}}</h2>
     
@@ -56,16 +63,19 @@
     
     </div>
 
-<script src="./bower_components/angular/angular.js"></script>
-<script src="./bower_components/angular-animate/angular-animate.js"></script>
-<script src="./bower_components/angular-aria/angular-aria.js"></script>
-<script src="./bower_components/angular-material/angular-material.js"></script>
-<script src="./bower_components/angular-route/angular-route.js"></script>
 
-<script src="app.js"></script>
-<script src="./src/users/Users.js"></script>
-<script src="./src/users/UserController.js"></script>
-<script src="./src/users/UserService.js"></script>
+    <!-- inject:js -->
+    <script src="/app/bower_components/angular/angular.js"></script>
+    <script src="/app/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/app/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/app/bower_components/angular-material/angular-material.js"></script>
+    <script src="/app/bower_components/angular-route/angular-route.js"></script>
+    <script src="/app/src/app.js"></script>
+    <script src="/app/src/routes.config.js"></script>
+    <script src="/app/src/users/UserController.js"></script>
+    <script src="/app/src/users/UserService.js"></script>
+    <!-- endinject -->
+    
       
 </body>
 </html>
