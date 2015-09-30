@@ -15,4 +15,8 @@ angular
             .primaryPalette('purple')
             .accentPalette('pink');
 
+        
+    })
+    .config(function($compileProvider) {
+        $compileProvider.debugInfoEnabled(false);
     });
