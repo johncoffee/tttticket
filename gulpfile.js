@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var inject = require('gulp-inject');
 var concat = require('gulp-concat');
 var angularTemplates = require('gulp-angular-templates');
+var watch = require('gulp-watch');
 
 var js = [
     // vendor
@@ -19,21 +20,16 @@ var css = [
     './assets/**/*.css',
 ];
 
-gulp.task('inject', function () {
+gulp.task('develop', function () {
     var target = gulp.src('./app/index.html');
-        // .pipe(watch([
-        //    'css/**/*.css',
-        //    'js/**/*.js',
-        //]));
+    var sources = gulp.src(js, {read: false})
+        .pipe(watch(js));
     
-    // It's not necessary to read the files (will speed up things), we're only after their paths: 
-    var sources = gulp.src(js, {read: false});
-
-    return target.pipe(inject(sources))
+    return target.pipe( inject(sources, {'ignorePath':'app'}))
                  .pipe(gulp.dest('./app'));
 });
 
-gulp.task('concat', function () {
+gulp.task('build', function () {
     return gulp.src(js)
         .pipe(concat('app.js'))
         .pipe(gulp.dest('./build/'));

@@ -1,17 +1,18 @@
 angular.module('app')
 .config(function($routeProvider, $locationProvider) {
     $routeProvider
+        .when('/tickets', {
+            templateUrl: "partials/tickets.html",
+        })
+        .when('/schedule', {
+            templateUrl: "partials/schedule.html",
+        })
         .when('/login', {
             templateUrl: 'partials/login.html',
-            //resolve: {
-                // I will cause a 1 second delay
-                //delay: function($q, $timeout) {
-                //    var delay = $q.defer();
-                //    $timeout(delay.resolve, 1000);
-                //    return delay.promise;
-                //}
-            //}
         })
+        .otherwise({
+            templateUrl: 'partials/login.html',
+        });
         //.when('/Book/:bookId/ch/:chapterId', {
         //    templateUrl: 'chapter.html',
         //    controller: 'ChapterController'

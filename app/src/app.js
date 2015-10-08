@@ -1,6 +1,6 @@
 angular
     .module('app', ['ngMaterial', 'ngRoute'])
-    .config(function($mdThemingProvider, $mdIconProvider){
+    .config(function($mdIconProvider){
 
         $mdIconProvider
             .defaultIconSet("./assets/svg/avatars.svg", 128)
@@ -10,13 +10,9 @@ angular
             .icon("hangouts"   , "./assets/svg/hangouts.svg"    , 512)
             .icon("twitter"    , "./assets/svg/twitter.svg"     , 512)
             .icon("phone"      , "./assets/svg/phone.svg"       , 512);
-
-        $mdThemingProvider.theme('default')
-            .primaryPalette('purple')
-            .accentPalette('pink');
-
         
     })
+    
     .config(function($compileProvider) {
         $compileProvider.debugInfoEnabled(false);
     });
