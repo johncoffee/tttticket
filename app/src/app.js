@@ -1,5 +1,8 @@
 angular
-    .module('app', ['ngMaterial', 'ngRoute'])
+    .module('app', ['ngMaterial', 'ngRoute']);
+
+angular
+    .module('app')
     .config(function($mdIconProvider){
 
         $mdIconProvider
@@ -11,8 +14,10 @@ angular
             .icon("twitter"    , "./assets/svg/twitter.svg"     , 512)
             .icon("phone"      , "./assets/svg/phone.svg"       , 512);
         
-    })
-    
+    });
+
+angular
+    .module('app')
     .config(function($compileProvider) {
         $compileProvider.debugInfoEnabled(false);
     });
