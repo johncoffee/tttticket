@@ -1,10 +1,8 @@
 angular
     .module('app')
-    .config(function($mdThemingProvider){
+    .config(function($mdThemingProvider) {
         
         $mdThemingProvider.theme('default')
-            .primaryPalette('purple')
-            .accentPalette('pink');
-
-
+            .primaryPalette('light-blue')
+            .accentPalette('cyan');
     });

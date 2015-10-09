@@ -13,19 +13,10 @@
 <body ng-app="app">
 
 <!--pages-->
-<div ng-show="isLoggedIn">
+<div>
+    <ng-include src="'partials/menu.html'"></ng-include>
+    
     <div ng-view></div>
-    <div>
-        <ng-include src="'partials/menu.html'"></ng-include>
-    </div>
-</div>
-
-<!--login-->
-<div ng-show="!isLoggedIn">
-    <h1>Login</h1>
-    <p><input placeholder="username">
-    <p><input placeholder="password" type="password">
-    <p><md-button ng-click="isLoggedIn = true">go</md-button>
 </div>
 
 
