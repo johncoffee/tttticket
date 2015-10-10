@@ -41,7 +41,7 @@ function devBuild() {
     console.log(bowerFiles);
     var sources = gulp.src(bowerFiles.concat(js), {read: false});
     return gulp.src('./app/index.html')
-        .pipe( inject(sources, {'ignorePath':'app'}))
+        .pipe( inject(sources, {'ignorePath':'app', relative: true}))
         .pipe(gulp.dest('./app'));
 }
 
