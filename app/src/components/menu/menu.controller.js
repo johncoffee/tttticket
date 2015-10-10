@@ -5,6 +5,11 @@ function MenuController($log, Auth) {
             get: function () {
                 return Auth.authenticated;
             }
+        },
+        isAdmin: {
+            get: function () {
+                return Auth.admin;
+            }
         }
     })
 }

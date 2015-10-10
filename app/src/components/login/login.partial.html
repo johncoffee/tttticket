@@ -1,6 +1,32 @@
 <!-- LoginController as ctrl -->
 
-<p><input placeholder="username">
-<p><input placeholder="password" type="password">
-<p><md-button ng-click="ctrl.login()">login</md-button>
+<div layout="column">
+    <md-content layout-padding>
+        <form name="userForm">
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label>User name</label>
+                    <input ng-model="username">
+                </md-input-container>
+                
+                <md-input-container flex>
+                    <label>Password</label>
+                    <input ng-model="password" type="password">
+                </md-input-container>
+            </div>
+            
+            <div layout="" layout-sm="column" layout-align-sm="center">
+                <md-input-container flex>
+                    <md-checkbox class="green" ng-model="rememberme">
+                        Remember me
+                    </md-checkbox>
+                </md-input-container>
+                <md-input-container>
+                    <md-button ng-click="ctrl.login()">login</md-button>
+                </md-input-container>
+            </div>
+        </form>
+    </md-content>
+</div>
+
 

@@ -10,6 +10,9 @@ angular.module('app')
         .when('/login', {
             templateUrl: 'partials/login.html',
         })
+        .when('/metrics', {
+            templateUrl: 'partials/metrics.html',
+        })
         .otherwise({
             templateUrl: 'partials/login.html',
         });

@@ -8,6 +8,9 @@ Object.defineProperties(Auth.prototype, {
     admin: {
         set: function (value) {
             this.user.roles.admin = value;
+            if (value) {
+                this.authenticated = true;
+            }
         },
         get: function () {
             return this.user.roles.admin;
@@ -17,7 +20,6 @@ Object.defineProperties(Auth.prototype, {
         set: function (value) {
             this.user.roles.authenticated = value;
             if (!value) {
-                this.admin = false;
                 this.user = new Auth.User();
             }
         },

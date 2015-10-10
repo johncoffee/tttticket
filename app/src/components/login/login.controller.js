@@ -1,9 +1,9 @@
 function LoginController($log, Auth) {
-    Auth.authenticated = false;
+    //Auth.authenticated = false;
     
     this.login = function() {
-        Auth.authenticated = true;
-    }
+        Auth.admin = true;
+    };
 }
 
 angular.module("app").controller("LoginController", LoginController);
