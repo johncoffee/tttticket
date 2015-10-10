@@ -14,12 +14,10 @@
 
 <body ng-app="app">
 
-<!--pages-->
-<div>
-    <ng-include src="'partials/menu.html'"></ng-include>
-    
-    <div ng-view></div>
-</div>
+<ngj-menu></ngj-menu>
+
+<!--Pages spawn here-->
+<div ng-view></div>
 
 
 <!-- inject:js -->
@@ -32,11 +30,19 @@
 <script src="src/app.js"></script>
 <script src="src/routes.config.js"></script>
 <script src="src/theming.config.js"></script>
-<script src="src/components/Auth.js"></script>
+<script src="src/menu/menu.controller.js"></script>
+<script src="src/menu/menu.directive.js"></script>
+<script src="src/services/Auth.js"></script>
 <script src="src/components/login/login.controller.js"></script>
 <script src="src/components/login/login.directive.js"></script>
-<script src="src/components/menu/menu.controller.js"></script>
-<script src="src/components/menu/menu.directive.js"></script>
+<script src="src/pages/loginPage/loginPage.controller.js"></script>
+<script src="src/pages/loginPage/loginPage.directive.js"></script>
+<script src="src/pages/metricsPage/metricsPage.controller.js"></script>
+<script src="src/pages/metricsPage/metricsPage.directive.js"></script>
+<script src="src/pages/schedulePage/schedulePage.controller.js"></script>
+<script src="src/pages/schedulePage/schedulePage.directive.js"></script>
+<script src="src/pages/ticketsPage/ticketsPage.controller.js"></script>
+<script src="src/pages/ticketsPage/ticketsPage.directive.js"></script>
 <!-- endinject -->
 
 </body>

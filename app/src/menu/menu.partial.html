@@ -1,0 +1,19 @@
+<!-- MenuController as ctrl -->
+
+<div layout="row" class="colorNested" layout-align="space-between">
+
+    <div>
+        <md-button ng-href="#/tickets">Tickets</md-button>
+        <md-button ng-href="#/schedule">Schedule</md-button>
+    </div>
+
+    <div>
+        <md-button ng-if="ctrl.isAdmin" ng-href="#/metrics">admin stuff</md-button>
+        <md-button ng-if="!ctrl.isLoggedIn" ng-href="#/login" class="md-primary">Login</md-button>
+        <md-button ng-if="ctrl.isLoggedIn"
+                   ng-href="#/login" 
+                   ng-click="ctrl.logout()"
+                   class="md-primary">Logout</md-button>
+    </div>
+</div>
+

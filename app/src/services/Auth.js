@@ -1,5 +1,9 @@
 // authentication and authorization rules
 
+/**
+ * @class Auth
+ * @constructor
+ */
 function Auth () {
     this.user = new Auth.User();
 }

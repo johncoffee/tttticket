@@ -1,16 +1,17 @@
 
-function LoginDirective($log) {
+function TicketsPageDirective($log) {
     return {
         scope: {
+            //companyDetails: "="
         },
         restrict: "E",
-        controller: "LoginController",
+        controller: "TicketsPageController",
         controllerAs: "ctrl",
-        templateUrl: "src/components/login/login.partial.html",
+        templateUrl: "src/pages/ticketsPage/ticketsPage.partial.html",
         link: function (scope, element, attrs, controller) {
-            if (!scope.companyDetails) {
-                $log.debug("missing companyDetails - did you forget?");
-            }
+            //if (!scope.companyDetails) {
+            //    $log.debug("missing companyDetails - did you forget?");
+            //}
         //    attrs.$observe("companyId", function (newVal) {
         //        controller.setCompanyByID(newVal);
         //    });
@@ -25,4 +26,4 @@ function LoginDirective($log) {
 }
 
 
-angular.module("app").directive("ngjLogin", LoginDirective);
+angular.module("app").directive("ngjTicketsPage", TicketsPageDirective);

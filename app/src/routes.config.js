@@ -2,25 +2,24 @@ angular.module('app')
 .config(function($routeProvider, $locationProvider) {
     $routeProvider
         .when('/tickets', {
-            templateUrl: "partials/tickets.html",
+            template: "<ngj-tickets-page></ngj-tickets-page>",
+            caseInsensitiveMatch: true,
         })
         .when('/schedule', {
-            templateUrl: "partials/schedule.html",
+            template: "<ngj-schedule-page></ngj-schedule-page>",
+            caseInsensitiveMatch: true,
         })
         .when('/login', {
-            templateUrl: 'partials/login.html',
+            template: '<ngj-login-page></ngj-login-page>',
+            caseInsensitiveMatch: true,
         })
         .when('/metrics', {
-            templateUrl: 'partials/metrics.html',
+            template: '<ngj-metrics-page></ngj-metrics-page>',
+            caseInsensitiveMatch: true,
         })
         .otherwise({
-            templateUrl: 'partials/login.html',
+            redirectTo: '/login',
         });
-        //.when('/Book/:bookId/ch/:chapterId', {
-        //    templateUrl: 'chapter.html',
-        //    controller: 'ChapterController'
-        //});
 
-    // configure html5 to get links working on jsfiddle
     $locationProvider.html5Mode(false);
 });

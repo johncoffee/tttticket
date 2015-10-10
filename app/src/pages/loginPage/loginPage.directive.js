@@ -1,16 +1,13 @@
 
-function LoginDirective($log) {
+function LoginPageDirective($log) {
     return {
         scope: {
         },
         restrict: "E",
-        controller: "LoginController",
+        controller: "LoginPageController",
         controllerAs: "ctrl",
-        templateUrl: "src/components/login/login.partial.html",
+        templateUrl: "src/pages/loginPage/loginPage.partial.html",
         link: function (scope, element, attrs, controller) {
-            if (!scope.companyDetails) {
-                $log.debug("missing companyDetails - did you forget?");
-            }
         //    attrs.$observe("companyId", function (newVal) {
         //        controller.setCompanyByID(newVal);
         //    });
@@ -25,4 +22,4 @@ function LoginDirective($log) {
 }
 
 
-angular.module("app").directive("ngjLogin", LoginDirective);
+angular.module("app").directive("ngjLoginPage", LoginPageDirective);

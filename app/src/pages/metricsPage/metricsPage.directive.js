@@ -1,16 +1,14 @@
 
-function MenuDirective($log) {
+function MetricsPageDirective($log) {
     return {
         scope: {
-            companyDetails: "="
         },
         restrict: "E",
-        controller: "MenuController",
+        controller: "MetricsPageController",
         controllerAs: "ctrl",
-        templateUrl: "src/components/menu/menu.partial.html",
+        templateUrl: "src/pages/metricsPage/metricsPage.partial.html",
         link: function (scope, element, attrs, controller) {
             if (!scope.companyDetails) {
-                $log.debug("missing companyDetails - did you forget?");
             }
         //    attrs.$observe("companyId", function (newVal) {
         //        controller.setCompanyByID(newVal);
@@ -26,4 +24,4 @@ function MenuDirective($log) {
 }
 
 
-angular.module("app").directive("ngjMenu", MenuDirective);
+angular.module("app").directive("ngjMetricsPage", MetricsPageDirective);
