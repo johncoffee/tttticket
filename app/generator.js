@@ -84,16 +84,16 @@ var directiveTpl = '\n\
 function {{directiveName}}Directive($log) {\n\
     return {\n\
         scope: {\n\
-            companyDetails: "="\n\
+            //companyDetails: "="\n\
         },\n\
         restrict: "E",\n\
         controller: "{{controllerName}}",\n\
         controllerAs: "ctrl",\n\
         templateUrl: "{{templatePath}}",\n\
         link: function (scope, element, attrs, controller) {\n\
-            if (!scope.companyDetails) {\n\
-                $log.debug("missing companyDetails - did you forget?");\n\
-            }\n\
+        //    if (!scope.companyDetails) {\n\
+        //        $log.debug("missing companyDetails - did you forget?");\n\
+        //    }\n\
         //    attrs.$observe("companyId", function (newVal) {\n\
         //        controller.setCompanyByID(newVal);\n\
         //    });\n\
