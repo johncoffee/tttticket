@@ -20,35 +20,23 @@ var css = [
     './assets/**/*.css',
 ];
 
-gulp.task('develop', function () {
-    var target = gulp.src('./app/index.html');
-    var sources = gulp.src(js, {read: false})
-        .pipe(watch(js));
-    
-    return target.pipe( inject(sources, {'ignorePath':'app'}))
-                 .pipe(gulp.dest('./app'));
+var handle = null;
+gulp.task('watch', function () {
+    return gulp.src(js, {read: false})
+        .pipe(watch(js, {
+            events: ['unlink', 'add'],
+            //ignoreInitial: true,
+        }, function(){
+            clearTimeout(handle);
+            handle = setTimeout(devBuild, 33);
+        }));
 });
 
-gulp.task('build', function () {
-    return gulp.src(js)
-        .pipe(concat('app.js'))
-        .pipe(gulp.dest('./build/'));
-});
+function devBuild() {
+    var sources = gulp.src(js, {read: false});
+    return gulp.src('./app/index.html')
+        .pipe( inject(sources, {'ignorePath':'app'}))
+        .pipe(gulp.dest('./app'));
+}
 
-
-gulp.task('templates', function () {
-    return gulp.src(js)
-        //.pipe(concat('app.js'))
-        .pipe(gulp.src('./partials/**/*.html'))
-        .pipe(angularTemplates({module:"app"}))
-        //.pipe(concat('templates.js'))
-        .pipe(gulp.dest('./build/'));
-});
-
-var ngAnnotate = require('gulp-ng-annotate');
-
-gulp.task('annotate', function () {
-    return gulp.src(js)
-        .pipe(ngAnnotate())
-        .pipe(gulp.dest('build'));
-});
+gulp.task('inject', devBuild);
