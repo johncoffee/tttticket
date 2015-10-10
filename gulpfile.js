@@ -6,13 +6,6 @@ var watch = require('gulp-watch');
 var mainBowerFiles = require('main-bower-files');
 
 var js = [
-    // vendor
-    //"./app/bower_components/angular/angular.js",
-    //"./app/bower_components/angular-animate/angular-animate.js",
-    //"./app/bower_components/angular-aria/angular-aria.js",
-    //"./app/bower_components/angular-material/angular-material.js",
-    //"./app/bower_components/angular-route/angular-route.js",
-
     // our stuff
     './app/src/**/*.js',
     './app/assets/**/*.css',
