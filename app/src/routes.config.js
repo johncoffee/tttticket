@@ -17,6 +17,10 @@ angular.module('app')
             template: '<ngj-metrics-page></ngj-metrics-page>',
             caseInsensitiveMatch: true,
         })
+        .when('/me', {
+            template: '<ngj-personal-page></ngj-personal-page>',
+            caseInsensitiveMatch: true,
+        })
         .otherwise({
             redirectTo: '/login',
         });

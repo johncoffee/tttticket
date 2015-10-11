@@ -7,11 +7,13 @@
         <md-button ng-href="#/schedule">Schedule</md-button>
     </div>
 
-    <div>
-        <md-button ng-if="ctrl.isAdmin" ng-href="#/metrics">admin stuff</md-button>
+    <div ng-if="!ctrl.isLoggedIn">
         <md-button ng-if="!ctrl.isLoggedIn" ng-href="#/login" class="md-primary">Login</md-button>
-        <md-button ng-if="ctrl.isLoggedIn"
-                   ng-href="#/login" 
+    </div>
+    <div ng-if="ctrl.isLoggedIn">
+        <md-button ng-if="ctrl.isAdmin" ng-href="#/metrics" class="md-secondary">admin stuff</md-button>
+        <md-button ng-if="ctrl.isAdmin" ng-href="#/me">my tickets</md-button>
+        <md-button ng-href="#/login" 
                    ng-click="ctrl.logout()"
                    class="md-primary">Logout</md-button>
     </div>
