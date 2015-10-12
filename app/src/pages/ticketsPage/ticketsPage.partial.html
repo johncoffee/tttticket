@@ -1,46 +1,98 @@
 <!-- TicketsPageController as ctrl -->
 
-<md-content layout="row" layout-align="">
-    <div flex>
-        <h1 class="md-headline">Buy tickets</h1>
+<md-grid-list ng-if="!ctrl.buyTicket"
+              md-colssm="1"
+              md-cols-md="2"
+              md-cols-gt-md="3"   
+              md-row-height="1:1"
+              md-gutter="12px" md-gutter-gt-sm="8px">
 
-        <md-list>
-            <md-subheader class="md-no-sticky">NGJ 2016 tickets</md-subheader>
-            
-            <md-list-item class="md-3-line">
-                <div class="md-list-item-text" layout="column">
-                    <h3>Regular</h3>
-                    <h4>700 DKK (93 &euro;)</h4>
-                    <p>The regular ticket, everything included.</p>
-                </div>
-                <div>
-                    <md-button>BUY</md-button>
-                </div>
-            </md-list-item>
-            
-            <md-divider></md-divider>
-            
-            <md-list-item class="md-3-line">
-                <div class="md-list-item-text" layout="column">
-                    <h3>Student</h3>
-                    <h4>700 DKK (93 &euro;)</h4>
-                    <p>The cheaper student ticket, everything included, show us some student-identification.</p>
-                </div>
-            </md-list-item>
-            
-            <md-divider></md-divider>
-            
-            <md-subheader class="md-no-sticky">Other things</md-subheader>
-            <md-list-item class="md-2-line">
-                <div class="md-list-item-text">
-                    <h3>10 beers stamp card</h3>
-                    <p>Preordered beers!</p>
-                </div>
-            </md-list-item>
-            <md-divider></md-divider>
-
-        </md-list>
+    <md-grid-tile ng-repeat="ticket in ctrl.tickets"
+                  style="background: #29292b"
+                  md-rowspan="1"
+                  md-colspan="1">
         
-    </div>
+        <md-grid-tile-header>
+            <h3 class="md-headline" ng-bind="ticket.name" style="white-space: nowrap;"></h3>
+        </md-grid-tile-header>
+
+        <md-button ng-click="ctrl.buy(ticket)" class="md-primary">buy</md-button>
+
+        <md-grid-tile-footer layout-align="end center">
+            <div ng-bind="ticket.price" class="md-padding">buy</div>
+        </md-grid-tile-footer>
+
+    </md-grid-tile>
+
+</md-grid-list>
+
+
+<div class="md-padding" ng-if="ctrl.buyTicket">
     
-</md-content>
+    <md-tabs md-selected="ctrl.step" md-align-tabs="top" class="md-accent">
+        <md-tab>
+            <md-tab-label>
+                Purchase details
+            </md-tab-label>
+            <md-tab-body>
+                <md-content class="md-padding">
+                    <div layout="column">
+                        <div class="md-title" ng-bind="ctrl.buyTicket.name"></div>
+                        <div class="" ng-bind="ctrl.buyTicket.price"></div>
+                        <div class="md-margin" layout="" layout-align="center center" style="height: 65px">
+                            <md-button ng-disabled="ctrl.step1done"
+                                       ng-click="ctrl.step1done = true; ctrl.step = 1"
+                                       class="md-raised">Next</md-button>
+                        </div>
+                    </div>
+                    
+
+                </md-content>
+            </md-tab-body>
+        </md-tab>
+        <md-tab ng-disabled="!ctrl.step1done">
+            <md-tab-label>
+                Payment
+            </md-tab-label>
+            <md-tab-body>
+                <md-content class="md-padding">
+                    Send a lot of money to 1HFH2352HF5HF7KWWWASDGH
+                    <div layout layout-sm="column">
+                        <md-input-container flex>
+                            <label>First name</label>
+                            <input ng-disabled="ctrl.step2done" ng-model="user.firstName">
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Card number</label>
+                            <input ng-disabled="ctrl.step2done" ng-model="user.firstName1">
+                        </md-input-container>
+                    </div>
+                    <md-button ng-click="ctrl.step2done = true; ctrl.step = 2"
+                               ng-disabled="ctrl.step2done"
+                               class="md-raised">Next</md-button>
+                </md-content>
+            </md-tab-body>
+        </md-tab>
+        <md-tab ng-disabled="!ctrl.step2done">
+            <md-tab-label>
+                Receipt
+            </md-tab-label>
+            <md-tab-body>
+                <md-content class="md-padding">
+                    <p>Ordre nr 42
+                    <p><md-button ng-click="ctrl.print()"
+                               class="md-raised md-accent">print</md-button>
+                    <p>
+                        <md-button class="md-primary" ng-show="ctrl.step2done" 
+                                   ng-click="ctrl.buyTicket = null">
+                            return to tickets
+                        </md-button>
+                    </p>
+                </md-content>
+            </md-tab-body>
+        </md-tab>
+    </md-tabs>
+    <p ng-if="!ctrl.step2done">
+        <md-button class="md-warn" ng-click="ctrl.buyTicket = null">Cancel</md-button>
+    </p>
+</div>
