@@ -34,7 +34,7 @@ gulp.task('watch', function () {
 
 function devBuild() {
     var sources = gulp.src(bowerFiles.concat(js), {read: false});
-    setTimeout(templates, 1);
+    //setTimeout(templates, 1); // write template cache in next update loop
     return gulp.src('./app/index.html')
         .pipe( inject(sources, {'ignorePath':'app', relative: true}))
         .pipe(gulp.dest('./app'));
