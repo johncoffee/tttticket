@@ -29,7 +29,12 @@
 
 <div class="md-padding" ng-if="ctrl.buyTicket">
     
-    <md-tabs md-selected="ctrl.step" md-align-tabs="top" class="md-accent">
+    <md-tabs md-dynamic-height
+             md-border-bottom
+             md-stretch-tabs="auto"
+             md-selected="ctrl.step"
+             md-align-tabs="top" 
+             class="md-accent">
         <md-tab>
             <md-tab-label>
                 Purchase details
@@ -63,8 +68,19 @@
                             <input ng-disabled="ctrl.step2done" ng-model="user.firstName">
                         </md-input-container>
                         <md-input-container flex>
+                            <label>Email</label>
+                            <input ng-disabled="ctrl.step2done" ng-model="user.email">
+                        </md-input-container>
+                    </div>
+                    
+                    <div layout layout-sm="column">
+                        <md-input-container flex>
+                            <label>Reg number</label>
+                            <input ng-disabled="ctrl.step2done" ng-model="user.regno">
+                        </md-input-container>
+                        <md-input-container flex>
                             <label>Card number</label>
-                            <input ng-disabled="ctrl.step2done" ng-model="user.firstName1">
+                            <input ng-disabled="ctrl.step2done" ng-model="user.cardno">
                         </md-input-container>
                     </div>
                     <md-button ng-click="ctrl.step2done = true; ctrl.step = 2"

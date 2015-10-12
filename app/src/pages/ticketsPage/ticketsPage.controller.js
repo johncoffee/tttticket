@@ -1,4 +1,4 @@
-function TicketsPageController($log, $window) {
+function TicketsPageController($log, $window, $q) {
     this.tickets = [
         {
             name: "Nordic Game Jam 2016",
@@ -16,6 +16,10 @@ function TicketsPageController($log, $window) {
             name: "mobile pay",
         }
     ];
+    
+    this.sendOff = function() {
+        
+    };
     
     this.print = function() {
         $window.print();
