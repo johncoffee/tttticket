@@ -1,6 +1,6 @@
 <!-- MenuController as ctrl -->
 
-<div layout="row" class="colorNested" layout-align="space-between">
+<div layout="row" class="menu" layout-align="space-between">
 
     <div>
         <md-button ng-href="#/tickets">Tickets</md-button>
@@ -8,10 +8,10 @@
     </div>
 
     <div ng-if="!ctrl.isLoggedIn">
-        <md-button ng-if="!ctrl.isLoggedIn" ng-href="#/login" class="md-primary">Login</md-button>
+        <md-button ng-if="!ctrl.isLoggedIn" ng-href="#/login" class="md-accent">Login</md-button>
     </div>
     <div ng-if="ctrl.isLoggedIn">
-        <md-button ng-if="ctrl.isAdmin" ng-href="#/metrics" class="md-secondary">admin stuff</md-button>
+        <md-button ng-if="ctrl.isAdmin" ng-href="#/metrics" class="md-accent">admin stuff</md-button>
         <md-button ng-if="ctrl.isAdmin" ng-href="#/me">my tickets</md-button>
         <md-button ng-href="#/login" 
                    ng-click="ctrl.logout()"
