@@ -15,6 +15,7 @@ Object.defineProperties(Auth.prototype, {
             if (value) {
                 this.authenticated = true;
             }
+            this.user.persist();
         },
         get: function () {
             return this.user.roles.admin;
@@ -24,7 +25,10 @@ Object.defineProperties(Auth.prototype, {
         set: function (value) {
             this.user.roles.authenticated = value;
             if (!value) {
-                this.user = new Auth.User();
+                this.user.destroySession();
+            }
+            else {
+                this.user.persist();
             }
         },
         get: function () {
@@ -34,8 +38,20 @@ Object.defineProperties(Auth.prototype, {
 });
 
 Auth.User = function User() {
-    this.roles = {};
+    this.roles = sessionStorage.user ? JSON.parse(sessionStorage.user) : {};
+    console.log("roles",this);
+    this.persist = function () {
+        setTimeout(function () {
+            sessionStorage.user = JSON.stringify(this.roles);
+        },0);
+    };
+    this.destroySession = function () {
+        this.roles = {};    
+        this.persist();
+    };
 };
+
+
 
 
 angular.module('app')
