@@ -61,29 +61,31 @@
             </md-tab-label>
             <md-tab-body>
                 <md-content class="md-padding">
-                    Send a lot of money to 1HFH2352HF5HF7KWWWASDGH
+                    <p>Create a login. You can use this to access your tickets, but in any
+                    case we'll send one to your email.
+                    
                     <div layout layout-sm="column">
                         <md-input-container flex>
-                            <label>First name</label>
-                            <input ng-disabled="ctrl.step2done" ng-model="user.firstName">
+                            <label>Email</label>
+                            <input ng-disabled="ctrl.step2done" ng-model="ctrl.buyTicket.email">
                         </md-input-container>
                         <md-input-container flex>
-                            <label>Email</label>
-                            <input ng-disabled="ctrl.step2done" ng-model="user.email">
+                            <label>Password</label>
+                            <input ng-disabled="ctrl.step2done" ng-model="ctrl.buyTicket.password">
                         </md-input-container>
                     </div>
                     
                     <div layout layout-sm="column">
                         <md-input-container flex>
                             <label>Reg number</label>
-                            <input ng-disabled="ctrl.step2done" ng-model="user.regno">
+                            <input ng-disabled="ctrl.step2done" ng-model="ctrl.buyTicket.regno">
                         </md-input-container>
                         <md-input-container flex>
                             <label>Card number</label>
-                            <input ng-disabled="ctrl.step2done" ng-model="user.cardno">
+                            <input ng-disabled="ctrl.step2done" ng-model="ctrl.buyTicket.cardno">
                         </md-input-container>
                     </div>
-                    <md-button ng-click="ctrl.step2done = true; ctrl.step = 2"
+                    <md-button ng-click="ctrl.step2done = true; ctrl.loadLast(); ctrl.step = 2"
                                ng-disabled="ctrl.step2done"
                                class="md-raised">Next</md-button>
                 </md-content>
@@ -95,15 +97,28 @@
             </md-tab-label>
             <md-tab-body>
                 <md-content class="md-padding">
-                    <p>Ordre nr 42
-                    <p><md-button ng-click="ctrl.print()"
-                               class="md-raised md-accent">print</md-button>
-                    <p>
-                        <md-button class="md-primary" ng-show="ctrl.step2done" 
-                                   ng-click="ctrl.buyTicket = null">
-                            return to tickets
-                        </md-button>
-                    </p>
+                    <div ng-if="!ctrl.buyTicket.orderno">
+                        <p>Processing... Please wait.</p>
+                        <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+                    </div>
+
+                    <div ng-if="ctrl.buyTicket.orderno">
+                        <h2>Thanks!</h2>
+                        <p>Order no
+                            <span ng-bind="ctrl.buyTicket.orderno"></span>
+                        </p>
+                        
+                        <p><md-button ng-click="ctrl.print()"
+                                      class="md-raised md-accent">print</md-button>
+                        
+                        <p>
+                            <md-button class="md-primary" ng-show="ctrl.step2done"
+                                       ng-click="ctrl.buyTicket = null">
+                                return to tickets
+                            </md-button>
+                        </p>
+                    </div>
+
                 </md-content>
             </md-tab-body>
         </md-tab>
