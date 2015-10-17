@@ -1,14 +1,14 @@
-function MyTicketsController($log) {
+function MyTicketsController($log, MyTickets) {
     var tickets = this.tickets = [];
-    
-    tickets.push({
-        name: "Nordic Game Jam",
-    });
-    tickets.push({
-        name: "Copenhagen games festival",
-    });
-    tickets.push({
-        name: "w00t",
+
+    MyTickets.getMyTickets().then(function (myTickets) {
+        tickets.length = 0;
+        console.log(myTickets)
+        myTickets.forEach(function (ticket) {
+            tickets.push({
+                name: ticket.name,            
+            });
+        });
     });
 }
 
