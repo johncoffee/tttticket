@@ -1,5 +1,9 @@
 angular
-    .module('app', ['ngMaterial', 'ngRoute']);
+    .module('app', [
+        'ngMaterial',
+        'googlechart',
+        'ngRoute',
+    ]);
 
 angular
     .module('app')

@@ -1,5 +1,11 @@
 <!-- MetricsPageController as ctrl -->
 
-<div>
-    ticket sales....
-</div>
+<md-content class="md-margin">
+    
+    <div google-chart 
+         chart="ctrl.chartObject"
+         on-ready="ctrl.onChartReady()"
+         style="height: 600px;
+         width: 100%;"></div>
+    
+</md-content>
