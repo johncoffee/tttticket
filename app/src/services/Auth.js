@@ -52,7 +52,12 @@ Auth.User = function User() {
     }
     
     this.persist = function () {
-        sessionStorage[this.rolesKey] = JSON.stringify(this.roles);
+        try {
+            sessionStorage[this.rolesKey] = JSON.stringify(this.roles);
+        }
+        catch (e) {
+            console.warn(e);
+        }
     };
     this.destroySession = function () {
         this.roles = {};    
