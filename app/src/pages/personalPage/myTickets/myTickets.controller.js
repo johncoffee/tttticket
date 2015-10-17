@@ -3,7 +3,6 @@ function MyTicketsController($log, MyTickets) {
 
     MyTickets.getMyTickets().then(function (myTickets) {
         tickets.length = 0;
-        console.log(myTickets)
         myTickets.forEach(function (ticket) {
             tickets.push({
                 name: ticket.name,            

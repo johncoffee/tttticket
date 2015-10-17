@@ -5,18 +5,22 @@ function TicketsPageController($log, $window, $q, $timeout) {
         {
             name: "Nordic Game Jam 2016",
             price: "DKK 700,00",
+            
+            regno: 1234,
+            cardno: "1000 0000 0000 0008",
+            expm: 12,
+            expy: 12,
+            
         },
     ];
-    
-    this.buyTicket = this.tickets[0];
     
     this.paymentOptions = [
         {
             name: "mobile pay",
         },
         {
-            name: "mobile pay",
-        }
+            name: "VISA card",
+        },
     ];
     
     this.loadLast = function () {
@@ -47,10 +51,11 @@ function TicketsPageController($log, $window, $q, $timeout) {
         $window.print();
     };
 
-    this.reset();
+    vm.reset();
 }
 
 TicketsPageController.prototype.buy = function (ticket) {
+    this.step = 1;
     this.buyTicket = ticket;
 };
 
