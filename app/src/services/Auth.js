@@ -37,21 +37,28 @@ Object.defineProperties(Auth.prototype, {
     }
 });
 
+
 Auth.User = function User() {
-    this.roles = sessionStorage.user ? JSON.parse(sessionStorage.user) : {};
-    console.log("roles",this);
+    this.rolesKey = "roles";
+    this.roles = {};
+    
+    if (sessionStorage[this.rolesKey]) {
+        try {
+            this.user = JSON.parse(sessionStorage[this.rolesKey]);
+        }
+        catch (e) {
+            console.warn(e);
+        }
+    }
+    
     this.persist = function () {
-        setTimeout(function () {
-            sessionStorage.user = JSON.stringify(this.roles);
-        },0);
+        sessionStorage[this.rolesKey] = JSON.stringify(this.roles);
     };
     this.destroySession = function () {
         this.roles = {};    
-        this.persist();
+        sessionStorage.removeItem(this.rolesKey);
     };
 };
-
-
 
 
 angular.module('app')
