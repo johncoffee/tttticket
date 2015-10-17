@@ -22,8 +22,8 @@
     "shelljs": "^0.2.6"
   },
   "scripts": {
+    "start": "cd app/; http-server",
     "postinstall": "bower update",
-    "prestart": "npm update",
     "test": "protractor ./e2e/protractor.conf.js"
   }
 }
