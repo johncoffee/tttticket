@@ -6,4 +6,5 @@ tmp/
 .idea/
 app/jspm_packages/
 /app/templates.js
+/config.json
 [Bb]uild/
