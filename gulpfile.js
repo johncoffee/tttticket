@@ -12,6 +12,11 @@ var js = [
     './app/assets/**/*.css',
 ];
 
+var vendor = [
+    // vendor
+    "./app/taffydb/taffy.js",
+];
+
 var bowerFiles = mainBowerFiles({
     paths: {
         bowerDirectory: './app/bower_components',
@@ -33,16 +38,15 @@ gulp.task('watch', function () {
 });
 
 function devBuild() {
-    console.log("Remember: devBuild doesn't include added/removed bower components!");
-    var sources = gulp.src(bowerFiles.concat(js), {read: false});
-    //setTimeout(templates, 1); // write template cache in next update loop
+    //console.log("Remember: devBuild doesn't include added/removed bower components!");
+    var sources = gulp.src(bowerFiles.concat(vendor).concat(js), {read: false});
     return gulp.src('./app/index.html')
         .pipe( inject(sources, {'ignorePath':'app', relative: true}))
         .pipe(gulp.dest('./app'));
 }
 
 gulp.task('default', function(){
-    console.log("Building a dev-build... To build on file changes, use $ gulp watch");
+    return gulp.watch("watch");
 });
 
 function templates () {
