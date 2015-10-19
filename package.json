@@ -22,7 +22,7 @@
     "shelljs": "^0.2.6"
   },
   "scripts": {
-    "start": "cd app/; http-server",
+    "start": "cd app/; http-server --cors -p 8000 -a localhost -c-1",
     "postinstall": "bower update",
     "test": "protractor ./e2e/protractor.conf.js"
   }
