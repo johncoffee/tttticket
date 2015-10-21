@@ -8,14 +8,13 @@
     </div>
 
     <div ng-if="!ctrl.isLoggedIn">
-        <md-button ng-if="!ctrl.isLoggedIn" ng-href="#/login" class="md-accent">Login</md-button>
+        <md-button ng-href="#/login" ng-if="!ctrl.isLoggedIn"
+                   class="md-accent">Log in</md-button>
     </div>
     <div ng-if="ctrl.isLoggedIn">
-        <md-button ng-if="ctrl.isAdmin" ng-href="#/metrics" class="md-accent">admin stuff</md-button>
-        <md-button ng-if="ctrl.isAdmin" ng-href="#/me">my tickets</md-button>
-        <md-button ng-href="#/login" 
-                   ng-click="ctrl.logout()"
-                   class="md-primary">Logout</md-button>
+        <md-button ng-href="#/metrics" ng-if="ctrl.isAdmin" class="md-accent">admin stuff</md-button>
+        <md-button ng-href="#/me">my tickets</md-button>
+        <md-button ng-href="#/login" ng-click="ctrl.logout()">Log out</md-button>
     </div>
 </div>
 
