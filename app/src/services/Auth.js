@@ -1,6 +1,6 @@
 
 function Auth() {
-    this.destroySession();
+    this.user = new User();
 
     if (sessionStorage[this.localStorageKey]) {
         try {
