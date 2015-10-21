@@ -5,7 +5,7 @@
  * @constructor
  */
 function Auth () {
-    this.user = new Auth.User();
+    this.user = new User();
 }
 
 Object.defineProperties(Auth.prototype, {
@@ -38,7 +38,7 @@ Object.defineProperties(Auth.prototype, {
 });
 
 
-Auth.User = function User() {
+function User() {
     this.rolesKey = "roles";
     this.roles = {};
     
@@ -63,7 +63,7 @@ Auth.User = function User() {
         this.roles = {};    
         sessionStorage.removeItem(this.rolesKey);
     };
-};
+}
 
 
 angular.module('app')
