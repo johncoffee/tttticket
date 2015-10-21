@@ -2,9 +2,10 @@
 
 /**
  * @class Auth
+ * @param {User} user
  * @constructor
  */
-function Auth () {
+function Auth (User) {
     this.user = new User();
 }
 
@@ -65,6 +66,9 @@ function User() {
     };
 }
 
+
+angular.module('app')
+    .factory('User', User);
 
 angular.module('app')
     .service('Auth', Auth);
