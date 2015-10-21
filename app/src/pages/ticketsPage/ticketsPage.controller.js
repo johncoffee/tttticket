@@ -5,7 +5,7 @@ function TicketsPageController($log,
                                $timeout,
                                Auth) {
     var vm = this;
-    var apiBase = "//localhost:8080/api/";
+    var apiBase = "/api/";
     
     vm.isLoggedIn = Auth.authenticated;
     
