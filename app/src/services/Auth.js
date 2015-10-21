@@ -1,22 +1,23 @@
-// authentication and authorization rules
 
-/**
- * @class Auth
- * @param {User} user
- * @constructor
- */
-function Auth (User) {
-    this.user = new User();
+function Auth() {
+    this.destroySession();
+
+    if (sessionStorage[this.localStorageKey]) {
+        try {
+            var recovered = JSON.parse(sessionStorage[this.localStorageKey]);
+            this.user.roles = recovered.roles;
+        }
+        catch (e) {
+            console.warn(e);
+        }
+    }
 }
 
 Object.defineProperties(Auth.prototype, {
     admin: {
         set: function (value) {
             this.user.roles.admin = value;
-            if (value) {
-                this.authenticated = true;
-            }
-            this.user.persist();
+            this.persistState();
         },
         get: function () {
             return this.user.roles.admin;
@@ -24,51 +25,47 @@ Object.defineProperties(Auth.prototype, {
     },
     authenticated: {
         set: function (value) {
-            this.user.roles.authenticated = value;
             if (!value) {
-                this.user.destroySession();
+                this.destroySession();
             }
             else {
-                this.user.persist();
+                this.user.roles.authenticated = value;
+                this.persistState();
             }
         },
         get: function () {
             return this.user.roles.authenticated;
         }
-    }
+    },
+    localStorageKey: {
+        value: "roles",
+    },
 });
 
+Auth.prototype.persistState = function () {
+    sessionStorage[this.localStorageKey] = this.user.serialize();
+};
+
+Auth.prototype.User = User;
+
+Auth.prototype.destroySession = function () {
+    this.user = new User();
+    sessionStorage.removeItem(this.localStorageKey);
+};
 
 function User() {
-    this.rolesKey = "roles";
     this.roles = {};
-    
-    if (sessionStorage[this.rolesKey]) {
-        try {
-            this.user = JSON.parse(sessionStorage[this.rolesKey]);
-        }
-        catch (e) {
-            console.warn(e);
-        }
-    }
-    
-    this.persist = function () {
-        try {
-            sessionStorage[this.rolesKey] = JSON.stringify(this.roles);
-        }
-        catch (e) {
-            console.warn(e);
-        }
-    };
-    this.destroySession = function () {
-        this.roles = {};    
-        sessionStorage.removeItem(this.rolesKey);
-    };
 }
 
+User.prototype.serialize = function () {
+    var result = null;
+    try {
+        result = JSON.stringify(this);
+    }
+    catch (e) {
+        console.warn(e);
+    }
+    return result;
+};
 
-angular.module('app')
-    .factory('User', User);
-
-angular.module('app')
-    .service('Auth', Auth);
+angular.module('app').service('Auth', Auth);
