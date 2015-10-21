@@ -1,34 +1,10 @@
 <!-- TicketsPageController as ctrl -->
 
-<md-grid-list ng-if="!ctrl.buyTicket"
-              md-colssm="1"
-              md-cols-md="2"
-              md-cols-gt-md="3"   
-              md-row-height="1:1"
-              md-gutter="12px" md-gutter-gt-sm="8px">
-
-    <md-grid-tile ng-repeat="ticket in ctrl.tickets"
-                  style="background: #29292b"
-                  md-rowspan="1"
-                  md-colspan="1">
-        
-        <md-grid-tile-header>
-            <h3 class="md-headline" ng-bind="ticket.name" style="white-space: nowrap;"></h3>
-        </md-grid-tile-header>
-
-        <md-button ng-click="ctrl.buy(ticket)" class="md-primary">buy</md-button>
-
-        <md-grid-tile-footer layout-align="end center">
-            <div ng-bind="ticket.price" class="md-padding">buy</div>
-        </md-grid-tile-footer>
-
-    </md-grid-tile>
-
-</md-grid-list>
-
+<ngj-tickets-for-sale ng-if="!ctrl.buyTicket"
+                      tickets="ctrl.tickets"></ngj-tickets-for-sale>
 
 <div class="md-padding" ng-if="ctrl.buyTicket">
-    
+    <!--<button ng-click="ctrl.step = 0">step {{ctrl.step}}</button> -->
     <md-tabs md-dynamic-height
              md-border-bottom
              md-stretch-tabs="auto"
@@ -45,93 +21,113 @@
                         <div class="md-title" ng-bind="ctrl.buyTicket.name"></div>
                         <div class="" ng-bind="ctrl.buyTicket.price"></div>
                         <div class="md-margin" layout="" layout-align="center center" style="height: 65px">
-                            <md-button ng-disabled="ctrl.step1done"
-                                       ng-click="ctrl.step1done = true; ctrl.step = 1"
+                            <md-button ng-disabled="false"
+                                       ng-click="ctrl.next()"
                                        class="md-raised">Next</md-button>
                         </div>
                     </div>
-                    
-
                 </md-content>
             </md-tab-body>
         </md-tab>
-        <md-tab ng-disabled="!ctrl.step1done">
+        
+        <md-tab ng-disabled="false" ng-if="!ctrl.isLoggedIn">
             <md-tab-label>
-                Payment
+                Who are you?
             </md-tab-label>
             <md-tab-body>
                 <md-content class="md-padding">
-                    <p>Create a login. You can use this to access your tickets, but in any
-                    case we'll send one to your email.
+                    <h1 class="md-display-1">Sign up</h1>
+                    <p class="md-accent">Create a login, so you can retrieve your tickets whenever you need then.</p>
                     
-                    <div layout layout-sm="column">
+                    <div layout layout-sm="column" layout-align="space-around">
                         <md-input-container flex>
                             <label>Email</label>
-                            <input ng-disabled="ctrl.step2done" ng-model="ctrl.buyTicket.email">
+                            <input ng-model="ctrl.buyTicket.email">
                         </md-input-container>
                         <md-input-container flex>
                             <label>Password</label>
-                            <input ng-disabled="ctrl.step2done" ng-model="ctrl.buyTicket.password">
+                            <input ng-model="ctrl.buyTicket.password">
                         </md-input-container>
                     </div>
                     
-                    <div layout layout-sm="column">
-                        <md-input-container flex>
-                            <label>Reg number</label>
-                            <input ng-disabled="ctrl.step2done" ng-model="ctrl.buyTicket.regno">
-                        </md-input-container>
-                        <md-input-container flex>
-                            <label>Expiration year</label>
-                            <input ng-disabled="ctrl.step2done" ng-model="ctrl.buyTicket.expy">
-                        </md-input-container>
-                        <md-input-container flex>
-                            <label>Expiration month</label>
-                            <input ng-disabled="ctrl.step2done" ng-model="ctrl.buyTicket.expm">
-                        </md-input-container>
-                        <md-input-container flex>
-                            <label>Card number</label>
-                            <input ng-disabled="ctrl.step2done" ng-model="ctrl.buyTicket.cardno">
-                        </md-input-container>
+                    <div class="md-margin layout-align-center-center layout-row" style="height: 65px">
+                        <md-button ng-click="ctrl.signUp(ctrl.buyTicket.email, ctrl.buyTicket.password);"
+                                   class="md-raised">Next</md-button>
                     </div>
-                    <md-button ng-click="ctrl.step2done = true; ctrl.loadLast(); ctrl.step = 2"
-                               ng-disabled="ctrl.step2done"
-                               class="md-raised">Next</md-button>
                 </md-content>
             </md-tab-body>
         </md-tab>
-        <md-tab ng-disabled="!ctrl.step2done">
+        
+        <md-tab ng-disabled="false">
+            <md-tab-label>
+                How would you like to pay?
+            </md-tab-label>
+            <md-tab-body>
+                <md-content class="md-padding">
+                    <!--<div layout layout-sm="column">-->
+                        <!--<md-input-container flex>-->
+                            <!--<label>Reg number</label>-->
+                            <!--<input ng-model="ctrl.buyTicket.regno">-->
+                        <!--</md-input-container>-->
+                        <!--<md-input-container flex>-->
+                            <!--<label>Expiration year</label>-->
+                            <!--<input ng-model="ctrl.buyTicket.expy">-->
+                        <!--</md-input-container>-->
+                        <!--<md-input-container flex>-->
+                            <!--<label>Expiration month</label>-->
+                            <!--<input ng-model="ctrl.buyTicket.expm">-->
+                        <!--</md-input-container>-->
+                        <!--<md-input-container flex>-->
+                            <!--<label>Card number</label>-->
+                            <!--<input ng-model="ctrl.buyTicket.cardno">-->
+                        <!--</md-input-container>-->
+                    <!--</div>-->
+
+                    <p>Options: </p>
+                    <div layout="row" ng-show="!ctrl.qpLink">
+                        <!--<md-button class="md-raised md-margin">Mobile pay</md-button>-->
+                        <md-button ng-click="ctrl.requestLink();"
+                                   class="md-raised md-margin">Credit card</md-button>
+                        <!--<md-button class="md-raised md-margin">bitcoin</md-button>-->
+                    </div>
+                    <div ng-show="ctrl.qpLink">
+                        <md-button class="md-primary md-raised md-padding"
+                                   ng-click="ctrl.qpCheckout()">
+                            Proceed to checkout (will open a new window)
+                        </md-button>
+                    </div>
+                    
+                </md-content>
+            </md-tab-body>
+        </md-tab>
+        
+        <md-tab ng-disabled="false">
             <md-tab-label>
                 Receipt
             </md-tab-label>
             <md-tab-body>
                 <md-content class="md-padding">
-                    <div ng-if="!ctrl.buyTicket.orderno">
-                        <p>Processing... Please wait.</p>
-                        <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-                    </div>
-
-                    <div ng-if="ctrl.buyTicket.orderno">
-                        <h2>Thanks!</h2>
-                        <p>Order no
-                            <span ng-bind="ctrl.buyTicket.orderno"></span>
-                        </p>
-                        
-                        <p><md-button ng-click="ctrl.print()"
-                                      class="md-raised md-accent">print</md-button>
-                        
-                        <p>
-                            <md-button class="md-primary" ng-show="ctrl.step2done"
-                                       ng-click="ctrl.buyTicket = null">
-                                return to tickets
-                            </md-button>
-                        </p>
-                    </div>
-
+                    <h2>Thanks!</h2>
+                    <p>Order no
+                        <span ng-bind="ctrl.buyTicket.orderno"></span>
+                    </p>
+                    
+                    <p><md-button ng-click="ctrl.print()"
+                                  class="md-raised md-accent">print</md-button>
+                    
+                    <p>
+                        <md-button class="md-primary" ng-show="true"
+                                   ng-click="ctrl.buyTicket = null">
+                            return to tickets
+                        </md-button>
+                    </p>
                 </md-content>
             </md-tab-body>
         </md-tab>
     </md-tabs>
-    <p ng-if="!ctrl.step2done">
-        <md-button class="md-warn" ng-click="ctrl.buyTicket = null">Cancel</md-button>
-    </p>
+
+    <div ng-show="ctrl.buyTicket.wait">
+        <p class="md-title">Processing... Please wait.</p>
+        <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+    </div>
 </div>
