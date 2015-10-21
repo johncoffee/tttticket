@@ -1,10 +1,11 @@
 
 function Auth() {
     this.user = new User();
-
-    if (sessionStorage[this.localStorageKey]) {
+    this.storage = (localStorage[this.localStorageKey]) ? localStorage : sessionStorage;
+    
+    if (this.storage[this.localStorageKey]) {
         try {
-            var recovered = JSON.parse(sessionStorage[this.localStorageKey]);
+            var recovered = JSON.parse(this.storage[this.localStorageKey]);
             this.user.roles = recovered.roles;
         }
         catch (e) {
@@ -37,19 +38,25 @@ Object.defineProperties(Auth.prototype, {
             return this.user.roles.authenticated;
         }
     },
+    rememberMe: {
+        set: function (value) {
+            this.storage = (value) ? localStorage : sessionStorage;
+        }
+    },
     localStorageKey: {
         value: "roles",
     },
 });
 
 Auth.prototype.persistState = function () {
-    sessionStorage[this.localStorageKey] = this.user.serialize();
+    this.storage[this.localStorageKey] = this.user.serialize();
 };
 
 Auth.prototype.User = User;
 
 Auth.prototype.destroySession = function () {
     this.user = new User();
+    localStorage.removeItem(this.localStorageKey); 
     sessionStorage.removeItem(this.localStorageKey);
 };
 

@@ -1,8 +1,14 @@
 function LoginController($log, Auth) {
-    //Auth.authenticated = false;
     
     this.login = function() {
-        Auth.admin = true;
+        Auth.rememberMe = this.rememberMe;
+        
+        Auth.authenticated = true;
+        
+        if (this.username == "admin") {
+            Auth.admin = true;
+        }
+        
     };
 }
 

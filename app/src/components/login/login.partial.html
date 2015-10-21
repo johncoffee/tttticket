@@ -6,18 +6,18 @@
             <div layout layout-sm="column">
                 <md-input-container flex>
                     <label>User name</label>
-                    <input ng-model="username">
+                    <input ng-model="ctrl.username">
                 </md-input-container>
                 
                 <md-input-container flex>
                     <label>Password</label>
-                    <input ng-model="password" type="password">
+                    <input ng-model="ctrl.password" type="password">
                 </md-input-container>
             </div>
             
             <div layout="" layout-sm="column" layout-align-sm="center">
                 <md-input-container flex>
-                    <md-checkbox class="green" ng-model="rememberme">
+                    <md-checkbox class="green" ng-model="ctrl.rememberMe">
                         Remember me
                     </md-checkbox>
                 </md-input-container>
