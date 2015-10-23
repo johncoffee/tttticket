@@ -9,6 +9,13 @@ function MyTicketsController($log, MyTickets) {
             });
         });
     });
+
+    this.showQR = function (ticket) {
+        angular.forEach(tickets, function (ticket) {
+            ticket.qr = false;
+        });
+        ticket.qr = true;
+    };
 }
 
 angular.module("app").controller("MyTicketsController", MyTicketsController);
