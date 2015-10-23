@@ -8,7 +8,9 @@ function LoginController($log, Auth) {
         if (this.username == "admin") {
             Auth.admin = true;
         }
-        
+        else if (this.username == "test") {
+            Auth.test = true;
+        }
     };
 }
 
