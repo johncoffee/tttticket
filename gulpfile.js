@@ -1,18 +1,23 @@
 var gulp = require('gulp');
 var inject = require('gulp-inject');
 var concat = require('gulp-concat');
-var angularTemplates = require('gulp-angular-templates');
+var gulpFilter = require('gulp-filter');
 var watch = require('gulp-watch');
 var mainBowerFiles = require('main-bower-files');
 var templateCache = require('gulp-angular-templatecache');
 
+var css = [
+    "./app/assets/**/*.css",
+];
 var js = [
-    // vendor
-    "./app/taffydb/taffy.js",
+    // vendor (not picked up by mainBowerFiles)
+    "./app/bower_components/taffydb/taffy.js",
     
     // our stuff
     './app/src/**/*.js',
     './app/assets/**/*.css',
+
+    './app/templates.js',
 ];
 
 var bowerFiles = mainBowerFiles({
@@ -22,8 +27,6 @@ var bowerFiles = mainBowerFiles({
         bowerJson: './bower.json'
     }
 });
-
-js = bowerFiles.concat(js);
 
 var handle = null;
 gulp.task('watch', function () {
@@ -39,16 +42,38 @@ gulp.task('watch', function () {
 
 function devBuild() {
     //console.log("Remember: devBuild doesn't include added/removed bower components!");
-    var sources = gulp.src(js, {read: false});
+    var jsAndCssGlob = bowerFiles.concat(js);
+    var sources = gulp.src(jsAndCssGlob, {read: false});
     return gulp.src('./app/index.html')
         .pipe( inject(sources, {'ignorePath':'app', relative: true}))
         .pipe(gulp.dest('./app'));
 }
 
 function prodBuild() {
-    return gulp.src(js)
+    var buildDir = "./app/build/";
+    var jsFilter = gulpFilter('**/*.js');
+    var cssFilter = gulpFilter('**/*.css');
+
+    templates();
+
+    var jsAndBowerCssGlob = bowerFiles.concat(js);
+    
+    gulp.src(jsAndBowerCssGlob)
+        .pipe(jsFilter)
         .pipe(concat('all.js'))
-        .pipe(gulp.dest("./app/build/"));
+        .pipe(gulp.dest(buildDir));
+
+    gulp.src(jsAndBowerCssGlob.concat(css))
+        .pipe(cssFilter) 
+        .pipe(concat('all.css'))
+        .pipe(gulp.dest(buildDir));
+
+    gulp.src('./app/index.html')
+        .pipe( inject( gulp.src([
+            buildDir + "**/*.js",
+            buildDir + "**/*.css",
+        ]), {'ignorePath':'build', relative: true}))
+        .pipe(gulp.dest(buildDir));
 }
 
 gulp.task('build', function(){
@@ -58,8 +83,8 @@ gulp.task('build', function(){
 
 function templates () {
     return gulp.src('./app/src/**/*.html')
-        .pipe(templateCache( {module: "app", base: ""} ))
-        .pipe(gulp.dest('./app'));
+        .pipe( templateCache( {module: "app", root: "src/"} ))
+        .pipe(gulp.dest("./app/"));
 }
 
 gulp.task('templates',templates);
