@@ -7,14 +7,12 @@ var mainBowerFiles = require('main-bower-files');
 var templateCache = require('gulp-angular-templatecache');
 
 var js = [
+    // vendor
+    "./app/taffydb/taffy.js",
+    
     // our stuff
     './app/src/**/*.js',
     './app/assets/**/*.css',
-];
-
-var vendor = [
-    // vendor
-    "./app/taffydb/taffy.js",
 ];
 
 var bowerFiles = mainBowerFiles({
@@ -24,6 +22,8 @@ var bowerFiles = mainBowerFiles({
         bowerJson: './bower.json'
     }
 });
+
+js = bowerFiles.concat(js);
 
 var handle = null;
 gulp.task('watch', function () {
@@ -39,14 +39,21 @@ gulp.task('watch', function () {
 
 function devBuild() {
     //console.log("Remember: devBuild doesn't include added/removed bower components!");
-    var sources = gulp.src(bowerFiles.concat(vendor).concat(js), {read: false});
+    var sources = gulp.src(js, {read: false});
     return gulp.src('./app/index.html')
         .pipe( inject(sources, {'ignorePath':'app', relative: true}))
         .pipe(gulp.dest('./app'));
 }
 
-gulp.task('default', function(){
-    return gulp.watch("watch");
+function prodBuild() {
+    return gulp.src(js)
+        .pipe(concat('all.js'))
+        .pipe(gulp.dest("./app/build/"));
+}
+
+gulp.task('build', function(){
+    console.log("Production build");
+    return prodBuild();
 });
 
 function templates () {
@@ -54,4 +61,5 @@ function templates () {
         .pipe(templateCache( {module: "app", base: ""} ))
         .pipe(gulp.dest('./app'));
 }
+
 gulp.task('templates',templates);
