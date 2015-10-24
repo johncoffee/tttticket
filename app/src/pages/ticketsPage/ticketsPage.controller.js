@@ -128,6 +128,7 @@ function TicketsPageController($log,
             case "processed":
                 console.debug("processed!!");
                 vm.buyTicket.orderno = 42; // response....
+                vm.buyTicket.wait = false;
                 vm.next();
                 break;
         }
