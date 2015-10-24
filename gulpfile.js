@@ -81,6 +81,10 @@ gulp.task('build', function(){
     return prodBuild();
 });
 
+gulp.task('templates', function(){
+    templates();
+});
+
 function templates () {
     return gulp.src('./app/src/**/*.html')
         .pipe( templateCache( {module: "app", root: "src/"} ))
