@@ -5,7 +5,7 @@ function PaymentController($log,
     var vm = this;
     vm.isLoggedIn = Auth.authenticated;
     var apiBase = "/api/";
-
+    vm.buyTicket = null; // the object to hold the state
     this.step = 0;
     
     this.print = function() {
@@ -104,6 +104,10 @@ function PaymentController($log,
             cache: false,
             responseType: "application/json",
         });
+    };
+    
+    this.setTicket = function (ticket) {
+        vm.buyTicket = angular.extend({}, ticket);    
     };
 }
 

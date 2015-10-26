@@ -3,13 +3,15 @@ function TicketsPageController($log,
                                $window,
                                $q, 
                                $timeout,
-                               Auth) {
+                               Auth,
+                               PaymentProvider) {
     var vm = this;
     
     vm.isLoggedIn = Auth.authenticated;
-    
+    vm.paymentFlowName = "checkout";
     this.onTicketClick = function (ticket) {
         this.buyTicket = angular.copy(ticket);
+        PaymentProvider.getInstance(vm.paymentFlowName).setTicket(ticket);
     };
     
     this.tickets = [];

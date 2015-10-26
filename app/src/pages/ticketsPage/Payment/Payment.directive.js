@@ -1,5 +1,5 @@
 
-function PaymentDirective($log) {
+function PaymentDirective($log, PaymentProvider) {
     return {
         scope: {
             //companyDetails: "="
@@ -9,7 +9,13 @@ function PaymentDirective($log) {
         controllerAs: "ctrl",
         templateUrl: "src/pages/ticketsPage/Payment/Payment.partial.html",
         link: function (scope, element, attrs, controller) {
-        //    if (!scope.companyDetails) {
+            if (!attrs.name) {
+                $log.error("PaymentDirective Must have a attr.name");
+            }
+            else {
+                PaymentProvider.register(attrs.name);
+            }
+            //    if (!scope.companyDetails) {
         //        $log.debug("missing companyDetails - did you forget?");
         //    }
         //    attrs.$observe("companyId", function (newVal) {
