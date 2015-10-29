@@ -1,0 +1,39 @@
+<!-- SignUpController as ctrl -->
+
+<div layout="column">
+    
+    <md-content layout-padding ng-if="ctrl.state == 'form'">
+        <form name="userForm">
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label>User name</label>
+                    <input ng-model="ctrl.username">
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label>Password</label>
+                    <input ng-model="ctrl.password" type="password">
+                </md-input-container>
+            </div>
+
+            <div layout="" layout-sm="column" layout-align-sm="center">
+                <md-input-container>
+                    <md-button ng-click="ctrl.signup()">sign up!</md-button>
+                </md-input-container>
+            </div>
+        </form>
+    </md-content>
+    
+    <md-content ng-if="ctrl.state == 'pending'">
+        <h3 class="md-heading">Check your mailbox...</h3>
+        <p>Thanks for signing up! We've sent you an email to validate your e-mail address. Please go and check it out.</p>
+    </md-content>
+
+    <md-content ng-if="ctrl.state == 'validate'">
+        <h3 class="md-heading">Validating......</h3>
+
+    </md-content>
+
+</div>
+
+
