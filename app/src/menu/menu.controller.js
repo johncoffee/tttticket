@@ -4,10 +4,17 @@
  * @param {Auth} Auth
  * @constructor
  */
-function MenuController($log, Auth) {
+function MenuController($log, Auth, $http) {
 
     this.logout = function() {
-        Auth.authenticated = false;
+        $http({
+            method: "get",
+            cache: false,
+            url: "/api/logout.php",
+        })
+        .then(function () {
+            Auth.authenticated = false;
+        });
     };
 
     Object.defineProperties(this, {
