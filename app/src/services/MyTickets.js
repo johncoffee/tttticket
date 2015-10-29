@@ -1,7 +1,32 @@
-function MyTickets($q, Auth) {
+function MyTickets($q, Auth, $http) {
     
     this.getMyTickets = function () {
+        var deferred = $q.defer();
+
         var tickets = [];
+        
+        $http({
+            method: "POST",
+            data: {
+                address: "n4SKTwh8xxNMSH7uN2xRZym7iXCZNwy8vj",
+            },
+            url: "/api/addressinfo.php",
+            responseType: "json",
+        })
+        .then(function (response) {
+            console.debug(response.data.assets);
+            angular.forEach(response.data.assets, function (asset) {
+                for (var i = 0; i < asset.amount; i++) {
+                    tickets.push(new Ticket(Math.random(), {
+                        name: asset.assetId,
+                    }));
+                } 
+                console.debug(tickets);
+                deferred.resolve(tickets);
+            });
+        }, deferred.reject);
+        
+        //debug 
         if (Auth.test) {
             tickets.push( new Ticket(1, {
                 name: "Nordic Game Jam",
@@ -11,7 +36,8 @@ function MyTickets($q, Auth) {
                 name: "Beer ticket",
             }));
         }
-        return $q.when(tickets);
+        
+        return deferred.promise;
     };
 }
 
