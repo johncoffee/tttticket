@@ -24,15 +24,6 @@ Object.defineProperties(Auth.prototype, {
             return this.user.roles.admin;
         }
     },
-    test: {
-        set: function (value) {
-            this.user.roles.test = value;
-            this.persistState();
-        },
-        get: function () {
-            return this.user.roles.test;
-        }
-    },
     authenticated: {
         set: function (value) {
             if (!value) {
