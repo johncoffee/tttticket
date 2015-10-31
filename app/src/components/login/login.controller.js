@@ -17,14 +17,8 @@ function LoginController($log, $http, Auth) {
         .then(function (response) {
             console.debug(response.data);
             Auth.authenticated = response.data.loggedin;
+            Auth.admin = response.data.admin;
         });
-        
-        if (this.username == "admin") {
-            Auth.admin = true;
-        }
-        else if (this.username == "test") {
-            Auth.test = true;
-        }
     };
 }
 
