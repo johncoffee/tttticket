@@ -8,7 +8,7 @@
               md-gutter="12px" md-gutter-gt-sm="8px">
 
     <md-grid-tile ng-repeat="ticket in ctrl.tickets"
-                  style="background: #29292b"
+                  style="background: {{ticket.colour}}"
                   md-rowspan="1"
                   md-colspan="1">
 

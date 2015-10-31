@@ -11,7 +11,7 @@ function MyTickets($q, Auth, $http) {
                 address: "n4SKTwh8xxNMSH7uN2xRZym7iXCZNwy8vj",
             },
             url: "/api/addressinfo.php",
-            responseType: "json",
+            cache: true,
         })
         .then(function (response) {
             console.debug(response.data.assets);

@@ -10,7 +10,13 @@ function TicketsForSaleDirective($log) {
         controllerAs: "ctrl",
         templateUrl: "src/pages/ticketsPage/TicketsForSale/TicketsForSale.partial.html",
         link: function (scope, element, attrs, controller) {
-            controller.tickets = scope.tickets;
+            if (scope.tickets) {
+                controller.tickets = scope.tickets;
+            }
+            else if (attrs.festId) {
+                controller.getTickets(attrs.festId);
+            }
+            
         //    if (!scope.companyDetails) {
         //        $log.debug("missing companyDetails - did you forget?");
         //    }
