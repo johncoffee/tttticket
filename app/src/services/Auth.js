@@ -61,8 +61,6 @@ Auth.prototype.persistState = function () {
     this.storage[this.localStorageKey] = this.user.serialize();
 };
 
-Auth.prototype.User = User;
-
 Auth.prototype.destroySession = function () {
     this.user = new User();
     localStorage.removeItem(this.localStorageKey); 
