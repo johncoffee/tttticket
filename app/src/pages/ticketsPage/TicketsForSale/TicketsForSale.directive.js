@@ -13,8 +13,8 @@ function TicketsForSaleDirective($log) {
             if (scope.tickets) {
                 controller.tickets = scope.tickets;
             }
-            else if (attrs.festId) {
-                controller.getTickets(attrs.festId);
+            if (attrs.ticketType) {
+                controller.getTickets(attrs.ticketType);
             }
             
         //    if (!scope.companyDetails) {
