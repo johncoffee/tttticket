@@ -37,16 +37,21 @@
                 <div layout layout-sm="column" layout-align="space-around">
                     <md-input-container flex>
                         <label>Email</label>
-                        <input ng-model="ctrl.buyTicket.email">
+                        <input ng-model="ctrl.buyTicket.email" type="email">
                     </md-input-container>
                     <md-input-container flex>
                         <label>Password</label>
-                        <input ng-model="ctrl.buyTicket.password">
+                        <input ng-model="ctrl.buyTicket.password" type="password">
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Password (again)</label>
+                        <input ng-model="ctrl.buyTicket.password2" type="password">
                     </md-input-container>
                 </div>
 
                 <div class="md-margin layout-align-center-center layout-row" style="height: 65px">
-                    <md-button ng-click="ctrl.signUp(ctrl.buyTicket.email, ctrl.buyTicket.password);"
+                    <md-button ng-disabled="ctrl.buyTicket.password != ctrl.buyTicket.password2"
+                                ng-click="ctrl.signUp(ctrl.buyTicket.email, ctrl.buyTicket.password);"
                                class="md-raised">Next</md-button>
                 </div>
             </md-content>

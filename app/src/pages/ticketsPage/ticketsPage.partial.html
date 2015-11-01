@@ -1,11 +1,13 @@
-<!-- TicketsPageController as ctrl -->
+<!-- TicketsPageController as vm -->
 
-<ngj-tickets-for-sale ng-if="!ctrl.buyTicket"
+<ngj-tickets-for-sale ng-show="vm.showTickets"
                       ticket-type="1"
-                      on-ticket-click="ctrl.onTicketClick(ticket)"></ngj-tickets-for-sale>
+                      on-ticket-click="vm.onTicketClick(ticket);"></ngj-tickets-for-sale>
 
-<div class="md-padding" ng-if="ctrl.buyTicket">
+<div class="md-padding" ng-show="!vm.showTickets">
     
-    <ngj-payment name="{{paymentFlowName}}"></ngj-payment>
-    
+    <ngj-payment ticket="vm.buyTicket"></ngj-payment>
+    <p>
+        <md-button ng-click="vm.showTickets = true; vm.buyTicket = null">Cancel</md-button>
+    </p>
 </div>

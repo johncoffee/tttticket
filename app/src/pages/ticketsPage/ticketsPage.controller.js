@@ -3,14 +3,20 @@ function TicketsPageController($log,
                                $window,
                                $q, 
                                $timeout,
-                               Auth,
-                               PaymentProvider) {
+                               Auth) {
     var vm = this;
-    vm.paymentFlowName = "checkout";
+    vm.showTickets = true;
+    vm.buyTicket = null;
     
-    this.onTicketClick = function (ticket) {
-        this.buyTicket = angular.copy(ticket);
-        PaymentProvider.getInstance(vm.paymentFlowName).setTicket(ticket);
+    vm.onTicketClick = function (ticket) {
+        console.debug(ticket);
+        vm.buyTicket = {
+            name: ticket.name,
+            price: ticket.price_tag,
+            amount: ticket.price_dkk,
+        };
+        vm.showTickets = false;
+        console.debug(vm.buyTicket);
     };  
 }
 

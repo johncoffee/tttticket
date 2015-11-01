@@ -1,20 +1,20 @@
 
-function PaymentDirective($log, PaymentProvider) {
+function PaymentDirective($log) {
     return {
         scope: {
-            //companyDetails: "="
+            ticket: "=",
         },
         restrict: "E",
         controller: "PaymentController",
         controllerAs: "ctrl",
         templateUrl: "src/pages/ticketsPage/Payment/Payment.partial.html",
         link: function (scope, element, attrs, controller) {
-            if (!attrs.name) {
-                $log.error("PaymentDirective Must have a attr.name");
-            }
-            else {
-                PaymentProvider.register(attrs.name);
-            }
+            scope.$watch('ticket', function (newValue) {
+                if (newValue) {
+                    controller.setTicket(newValue);
+                }
+            });
+            
             //    if (!scope.companyDetails) {
         //        $log.debug("missing companyDetails - did you forget?");
         //    }

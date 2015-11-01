@@ -6,7 +6,7 @@ function TicketsPageDirective($log) {
         },
         restrict: "E",
         controller: "TicketsPageController",
-        controllerAs: "ctrl",
+        controllerAs: "vm",
         templateUrl: "src/pages/ticketsPage/ticketsPage.partial.html",
         link: function (scope, element, attrs, controller) {
             //if (!scope.companyDetails) {

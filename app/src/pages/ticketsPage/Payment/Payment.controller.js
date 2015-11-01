@@ -1,5 +1,6 @@
 function PaymentController($log, 
                            Auth,
+                           $http,
                            $timeout) {
     
     var vm = this;
@@ -14,10 +15,28 @@ function PaymentController($log,
     
     this.signUp = function(email, password) {
         vm.buyTicket.wait = true;
-        $timeout(function () {
+        $http({
+            method: "POST",
+            url: "/api/signup.php",
+            data: {
+                email: email,
+                password: password,
+            },
+            cache: false,
+        })
+        .then(function (response) {
+                console.log(response)
+            if (response.data.loggedin) {
+                Auth.authenticated = true;
+                vm.next();
+            }
+            else {
+                console.warn('signup failed');    
+            }
+        })
+        .finally(function () {
             vm.buyTicket.wait = false;
-            vm.next();
-        }, 666);
+        });
     };
 
     this.next = function () {
@@ -42,22 +61,21 @@ function PaymentController($log,
             cache: false,
             responseType: "application/json",
         })
-            .success(function(response) {
-                vm.buyTicket.wait = false;
+            .then(function(response) {
 
                 console.debug(response);
-                if (response.error) {
-                    console.warn(response);
+                var data = response.data;
+                if (data.error) {
+                    console.warn(data);
                 }
                 else {
-                    vm.qpLink = response.qpLink;
-                    vm.transID = response.transID;
+                    vm.qpLink = data.qpLink;
+                    vm.transID = data.transID;
                 }
             })
-            .error(function () {
+            .finally(function(){
                 vm.buyTicket.wait = false;
-                console.warn("sheit");
-            });
+            })
     };
 
     this.qpCheckout = function () {
@@ -74,13 +92,16 @@ function PaymentController($log,
     this.pollStatus = function (transID) {
         clearTimeout(handle);
         handle = setTimeout(function () {
-            vm.requestStatus(transID).success(vm.onStatusResponse);
+            vm.buyTicket.wait = true;
+            vm.requestStatus(transID).then(vm.onStatusResponse).finally(function () {
+                vm.buyTicket.wait = false;
+            });
         }, 4333);
     };
 
     this.onStatusResponse = function (response) {
-        console.debug(response);
-        var payment = response.payment;
+        var data = response.data;
+        var payment = data.payment;
         switch (payment.state) {
             case "initial":
                 vm.pollStatus(vm.transID);
@@ -88,7 +109,6 @@ function PaymentController($log,
             case "processed":
                 console.debug("processed!!");
                 vm.buyTicket.orderno = 42; // response....
-                vm.buyTicket.wait = false;
                 vm.next();
                 break;
         }
@@ -102,12 +122,17 @@ function PaymentController($log,
                 id: id,
             },
             cache: false,
-            responseType: "application/json",
+            responseType: "json",
         });
     };
     
     this.setTicket = function (ticket) {
-        vm.buyTicket = angular.extend({}, ticket);    
+        console.debug(ticket);
+        vm.buyTicket = {
+            price: ticket.price,
+            name: ticket.name,
+        };    
+        console.log("set", ticket);
     };
 }
 
