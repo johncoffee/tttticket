@@ -1,4 +1,4 @@
-function LoginController($log, $http, Auth) {
+function LoginController($log, $http, Auth, $location) {
     var vm = this;
     
     this.login = function() {
@@ -15,9 +15,11 @@ function LoginController($log, $http, Auth) {
             responseType: "json",
         })
         .then(function (response) {
-            console.debug(response.data);
-            Auth.authenticated = response.data.loggedin;
-            Auth.admin = response.data.admin;
+            if (response.data.loggedin) {
+                Auth.authenticated = response.data.loggedin;
+                Auth.admin = response.data.admin;
+                $location.path("/me");
+            }
         });
     };
 }
