@@ -1,4 +1,7 @@
-
+/**
+ * Auth
+ * @constructor
+ */
 function Auth() {
     this.user = new User();
     this.storage = (localStorage[this.localStorageKey]) ? localStorage : sessionStorage;
@@ -59,6 +62,7 @@ Auth.prototype.destroySession = function () {
 };
 
 function User() {
+    this.id = -1;
     this.roles = {};
 }
 
