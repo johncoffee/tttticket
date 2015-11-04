@@ -5,9 +5,6 @@ function Shop($log, $q, $http) {
             method: "GET",
             url: "/api/tickets.php",
             cache: true,
-            params: {
-                type: type,
-            }
         })
         .then(function (result) {
             return result.data.tickets;
