@@ -81,6 +81,10 @@ gulp.task('build', function(){
     return prodBuild();
 });
 
+gulp.task('default', function(){
+    console.log("Gulp what? WHAT DO YOU WANT!?");
+});
+
 gulp.task('templates', function(){
     templates();
 });
