@@ -1,14 +1,18 @@
 function MyTicketsController($log, MyTickets) {
-    var tickets = this.tickets = [];
-
-    MyTickets.getMyTickets().then(function (myTickets) {
+    var tickets = [];
+    this.tickets = tickets;
+    
+    this.fetchFromAddresses = function (addresses) {
         tickets.length = 0;
-        myTickets.forEach(function (ticket) {
-            tickets.push({
-                name: ticket.name,            
+        
+        MyTickets.getTicketsForAddresses(addresses).then(function (myTickets) {
+            myTickets.forEach(function (ticket) {
+                tickets.push({
+                    name: ticket.name,
+                });
             });
         });
-    });
+    };
 
     this.showQR = function (ticket) {
         angular.forEach(tickets, function (ticket) {

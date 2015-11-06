@@ -1,5 +1,5 @@
 <!-- MyTicketsController as ctrl -->
-
+<pre>{{ctrl.tickets|json:2}}</pre>
 <md-grid-list
         md-cols-sm="1" 
         md-cols-md="2"
@@ -7,12 +7,14 @@
         md-row-height="1:1"
         md-gutter="12px" md-gutter-gt-sm="8px" >
     
+    
+    
     <md-grid-tile ng-repeat="ticket in ctrl.tickets"
                   style="background: #8a3cff"
                   md-rowspan="1" 
                   md-colspan="1">
         <md-grid-tile-header>
-            <h3 class="md-headline" ng-bind="ticket.name" style="white-space: nowrap;"></h3>
+            <h3 class="md-headline" ng-bind="::ticket.name" style="white-space: nowrap;"></h3>
         </md-grid-tile-header>
         
         <div ng-show="ticket.qr">[QR code here]</div>

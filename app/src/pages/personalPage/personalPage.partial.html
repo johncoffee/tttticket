@@ -2,4 +2,6 @@
 
 <h1 class="md-headline"></h1>
 
-<ngj-my-tickets></ngj-my-tickets>
+<input ng-model="ctrl._address"><md-button ng-click="ctrl.addAddress(ctrl._address); ctrl._address = ''" class="">Add</md-button>
+     
+<ngj-my-tickets addresses="ctrl.addresses"></ngj-my-tickets>

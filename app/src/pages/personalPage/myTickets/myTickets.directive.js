@@ -2,16 +2,21 @@
 function MyTicketsDirective($log) {
     return {
         scope: {
-            //companyDetails: "="
+            addresses: "="
         },
         restrict: "E",
         controller: "MyTicketsController",
         controllerAs: "ctrl",
         templateUrl: "src/pages/personalPage/myTickets/myTickets.partial.html",
         link: function (scope, element, attrs, controller) {
-        //    if (!scope.companyDetails) {
-        //        $log.debug("missing companyDetails - did you forget?");
-        //    }
+            if (!scope.addresses) {
+                $log.debug("missing addresses");
+            }
+            scope.$watchCollection('addresses', function(newValue) {
+                if (newValue) {
+                    controller.fetchFromAddresses(newValue);
+                }
+            });
         //    attrs.$observe("companyId", function (newVal) {
         //        controller.setCompanyByID(newVal);
         //    });
