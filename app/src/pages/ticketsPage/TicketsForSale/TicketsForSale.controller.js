@@ -8,14 +8,13 @@ function TicketsForSaleController($log, $q, $scope, $http, Shop) {
 
     this.getTickets = function (type) {
         Shop.getTickets(type).then(function (tickets) {
-            
-            angular.forEach(tickets, function (ticketVO) {
-                vm.tickets.push({
+            for (var i in  tickets) {
+                var ticketVO = tickets[i];
+                vm.tickets[i] = {
                     name: ticketVO.title,
-                    colour: Math.random() > 0.5 ? "yellow" : "blue",
-                    price: ticketVO.price_tag,
-                });
-            });
+                    price: ticketVO.price_currency + " " + ticketVO.price_amount,
+                };
+            }
         });
     };
 }
