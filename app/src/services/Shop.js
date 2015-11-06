@@ -1,9 +1,9 @@
 function Shop($log, $q, $http) {
     
-    this.getTickets = function (type) {
+    this.getTickets = function () {
         return $http({
             method: "GET",
-            url: "/api/tickets.php",
+            url: "/api/shop.php",
             cache: true,
         })
         .then(function (result) {
