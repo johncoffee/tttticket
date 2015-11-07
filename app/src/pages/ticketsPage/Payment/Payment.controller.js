@@ -95,7 +95,7 @@ function PaymentController(CurrentUser,
         .then(function(response) {
                 var data = response.data;
                 vm.buyTicket.orderno = data.orderID;
-                vm.step++;
+                vm.next();
         })
         .finally(function(){
             vm.buyTicket.wait = false;
@@ -132,7 +132,7 @@ function PaymentController(CurrentUser,
                 break;
             case "processed":
                 vm.buyTicket.orderno = payment.order_id; // response....
-                vm.next();
+                vm.requestPayByCode(321, vm.buyTicket.ticketType);
                 break;
         }
     };
