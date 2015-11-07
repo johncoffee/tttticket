@@ -57,9 +57,9 @@ function PaymentController(CurrentUser,
 
         $http({
             url: apiBase + "request.php",
-            method: "GET",
-            params: {
-                ticket_type: vm.buyTicket.ticketType,
+            method: "POST",
+            data: {
+                ticketType: vm.buyTicket.ticketType,
             },
             cache: false,
             responseType: "application/json",
