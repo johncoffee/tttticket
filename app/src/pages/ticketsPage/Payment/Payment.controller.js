@@ -131,8 +131,7 @@ function PaymentController(CurrentUser,
                 vm.pollStatus(vm.transID);
                 break;
             case "processed":
-                console.debug("processed!!");
-                vm.buyTicket.orderno = 42; // response....
+                vm.buyTicket.orderno = payment.order_id; // response....
                 vm.next();
                 break;
         }
