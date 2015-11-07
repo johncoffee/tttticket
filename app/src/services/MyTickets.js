@@ -46,7 +46,7 @@ function MyTickets($q, Auth, $http) {
                 address: address,
             },
             url: "/api/addressinfo.php?address=" + address, // cache pr. URL I think
-            cache: true,
+            cache: false,
         })
         .then(function (response) {
             angular.forEach(response.data.assets, function (asset) {
