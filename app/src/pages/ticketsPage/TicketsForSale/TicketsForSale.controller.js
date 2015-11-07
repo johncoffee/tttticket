@@ -11,6 +11,7 @@ function TicketsForSaleController($log, $q, $scope, $http, Shop) {
             for (var i in  tickets) {
                 var ticketVO = tickets[i];
                 vm.tickets[i] = {
+                    shopItemID: ticketVO.id,
                     name: ticketVO.title,
                     price: ticketVO.price_currency + " " + ticketVO.price_amount,
                 };

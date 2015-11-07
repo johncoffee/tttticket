@@ -1,22 +1,11 @@
-function TicketsPageController($log, 
-                               $http,
-                               $window,
-                               $q, 
-                               $timeout,
-                               Auth) {
+function TicketsPageController() {
     var vm = this;
     vm.showTickets = true;
     vm.buyTicket = null;
     
     vm.onTicketClick = function (ticket) {
-        console.debug(ticket);
-        vm.buyTicket = {
-            name: ticket.name,
-            price: ticket.price_tag,
-            amount: ticket.price_dkk,
-        };
+        vm.buyTicket = ticket.shopItemID;
         vm.showTickets = false;
-        console.debug(vm.buyTicket);
     };  
 }
 
