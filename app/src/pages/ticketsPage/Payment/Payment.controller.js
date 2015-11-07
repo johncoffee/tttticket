@@ -1,13 +1,15 @@
-function PaymentController($log, 
+function PaymentController(CurrentUser,
                            Auth,
                            $http,
-                           $timeout) {
+                           Shop,
+                           $window) {
     
     var vm = this;
-    vm.isLoggedIn = Auth.authenticated;
+    vm.showSignUp = CurrentUser.isAuthenticated();
     var apiBase = "/api/";
     vm.buyTicket = null; // the object to hold the state
     this.step = 0;
+    this.method = false;
     
     this.print = function() {
         $window.print();
@@ -25,8 +27,9 @@ function PaymentController($log,
             cache: false,
         })
         .then(function (response) {
-                console.log(response)
+            console.debug(response);
             if (response.data.loggedin) {
+                Auth.user.id = response.data.loggedin;
                 Auth.authenticated = true;
                 vm.next();
             }
@@ -56,26 +59,47 @@ function PaymentController($log,
             url: apiBase + "request.php",
             method: "GET",
             params: {
-                ticket_type: 2,
+                ticket_type: vm.buyTicket.ticketType,
             },
             cache: false,
             responseType: "application/json",
         })
-            .then(function(response) {
-
-                console.debug(response);
+        .then(function(response) {
+            console.debug(response);
+            var data = response.data;
+            if (data.error) {
+                console.warn(data);
+            }
+            else {
+                vm.qpLink = data.qpLink;
+                vm.transID = data.transID;
+            }
+        })
+        .finally(function(){
+            vm.buyTicket.wait = false;
+        })
+    };
+    
+    this.requestPayByCode = function (code, ticketTypeID) {
+        vm.buyTicket.wait = true;
+        $http({
+            url: apiBase + "pay_by_code.php",
+            method: "POST",
+            data: {
+                ticketTypeID: ticketTypeID,
+                code: code,
+            },
+            cache: false,
+            responseType: "application/json",
+        })
+        .then(function(response) {
                 var data = response.data;
-                if (data.error) {
-                    console.warn(data);
-                }
-                else {
-                    vm.qpLink = data.qpLink;
-                    vm.transID = data.transID;
-                }
-            })
-            .finally(function(){
-                vm.buyTicket.wait = false;
-            })
+                vm.buyTicket.orderno = data.orderID;
+                vm.step++;
+        })
+        .finally(function(){
+            vm.buyTicket.wait = false;
+        })
     };
 
     this.qpCheckout = function () {
@@ -126,13 +150,27 @@ function PaymentController($log,
         });
     };
     
-    this.setTicket = function (ticket) {
-        console.debug(ticket);
+    this.setTicket = function (shopItemID) {
+        Shop.getTickets().then(function (shopItems) {
+            console.debug(shopItems, shopItemID);
+            var ticketData = null;
+
+            for (var i in shopItems) {
+                if (shopItems[i].id == shopItemID) {
+                    ticketData = shopItems[i];
+                    break;
+                }
+            }
+            vm.buyTicket = {
+                shopItemID: ticketData.shopItemID,
+                price: ticketData.price_currency + ' ' + ticketData.price_amount,
+                title: ticketData.title,
+                ticketType: ticketData.ticket_type,
+            };
+        });
         vm.buyTicket = {
-            price: ticket.price,
-            name: ticket.name,
-        };    
-        console.log("set", ticket);
+            wait: true,
+        };
     };
 }
 

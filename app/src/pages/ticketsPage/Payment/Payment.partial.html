@@ -8,14 +8,21 @@
          class="md-accent">
     <md-tab>
         <md-tab-label>
-            Purchase details
+            Order overview
         </md-tab-label>
         <md-tab-body>
             <md-content class="md-padding">
                 <div layout="column">
-                    <div class="md-title" ng-bind="ctrl.buyTicket.name"></div>
-                    <div class="" ng-bind="ctrl.buyTicket.price"></div>
-                    <div class="md-margin" layout="" layout-align="center center" style="height: 65px">
+                    <h3 class="md-title">Order overview</h3>
+                    
+                    <div>
+                        <div class="md-headline" ng-bind="ctrl.buyTicket.title"></div>
+                    </div>
+                    <div>
+                        Total: <span ng-bind="ctrl.buyTicket.price"></span> 
+                    </div>
+                    
+                    <div class="md-margin">
                         <md-button ng-disabled="false"
                                    ng-click="ctrl.next()"
                                    class="md-raised">Next</md-button>
@@ -25,7 +32,7 @@
         </md-tab-body>
     </md-tab>
 
-    <md-tab ng-disabled="false" ng-if="!ctrl.isLoggedIn">
+    <md-tab ng-disabled="false" ng-if="!ctrl.showSignUp">
         <md-tab-label>
             Who are you?
         </md-tab-label>
@@ -83,18 +90,34 @@
                 <!--</md-input-container>-->
                 <!--</div>-->
 
-                <p>Options: </p>
-                <div layout="row" ng-show="!ctrl.qpLink">
+                <p class="md-headline">
+                    Options
+                    <md-button ng-click="ctrl.method = false"  ng-show="ctrl.method"
+                               class="md-raised md-margin">choose other method</md-button>
+                </p>
+                <div layout>
                     <!--<md-button class="md-raised md-margin">Mobile pay</md-button>-->
-                    <md-button ng-click="ctrl.requestLink();"
-                               class="md-raised md-margin">Credit card</md-button>
-                    <!--<md-button class="md-raised md-margin">bitcoin</md-button>-->
-                </div>
-                <div ng-show="ctrl.qpLink">
-                    <md-button class="md-primary md-raised md-padding"
-                               ng-click="ctrl.qpCheckout()">
-                        Proceed to checkout (will open a new window)
-                    </md-button>
+                    <div ng-show="!ctrl.method">
+                        <md-button ng-click="ctrl.requestLink(); ctrl.method = 'creditcard'"
+                                   class="md-raised md-margin">Credit card</md-button>
+
+                        <md-button ng-click="ctrl.method = 'code'"
+                                   class="md-raised md-margin">Code</md-button>
+                    </div>
+                    
+                    <div ng-show="ctrl.method == 'code'">
+                        <input ng-model="ctrl.payCode" class="md-padding md-title">
+                        <md-button class="md-primary md-raised" ng-click="ctrl.requestPayByCode(ctrl.payCode, ctrl.buyTicket.ticketType)">Send</md-button>
+                    </div>
+                    
+                    <div ng-show="ctrl.method == 'creditcard'">
+                        <div ng-show="ctrl.qpLink">
+                            <md-button class="md-primary md-raised md-padding"
+                                       ng-click="ctrl.qpCheckout()">
+                                Proceed to checkout (will open a new window)
+                            </md-button>
+                        </div>
+                    </div>
                 </div>
 
             </md-content>
@@ -114,13 +137,6 @@
 
                 <p><md-button ng-click="ctrl.print()"
                               class="md-raised md-accent">print</md-button>
-
-                <p>
-                    <md-button class="md-primary" ng-show="true"
-                               ng-click="ctrl.buyTicket = null">
-                        return to tickets
-                    </md-button>
-                </p>
             </md-content>
         </md-tab-body>
     </md-tab>
