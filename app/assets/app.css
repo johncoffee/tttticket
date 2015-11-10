@@ -1,11 +1,9 @@
 html, body {
+    background: #fff;
 }
 
-.menu {
-    background: #1D5478;
-    color: #fff;
-}
 
 ngj-tickets-for-sale [role=listitem] {
     background: #FF762A;
 }
+
