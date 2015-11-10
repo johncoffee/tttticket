@@ -1,27 +1,31 @@
 <!-- LoginController as ctrl -->
 
-<div layout="column">
-    <md-content layout-padding>
+<div layout>
+    <div flex></div>
+    
+    <md-content layout-padding flex="none">
+        <h3>Log in</h3>
+        
         <form name="userForm">
             <div layout layout-sm="column">
                 <md-input-container flex>
                     <label>E-mail address</label>
-                    <input ng-model="ctrl.username">
+                    <input ng-model="ctrl.username" required type="email">
                 </md-input-container>
                 
                 <md-input-container flex>
                     <label>Password</label>
-                    <input ng-model="ctrl.password" type="password">
+                    <input ng-model="ctrl.password" type="password" required>
                 </md-input-container>
             </div>
             
-            <div layout="" layout-sm="column" layout-align-sm="center">
-                <md-input-container>
-                    <md-button ng-click="ctrl.login()">login</md-button>
-                </md-input-container>
+            <div layout layout-align="center center">
+                <md-button ng-click="ctrl.login()" class="md-raised md-primary md">login</md-button>
             </div>
         </form>
     </md-content>
+
+    <div flex></div>
 </div>
 
 
