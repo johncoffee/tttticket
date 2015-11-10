@@ -1,20 +1,18 @@
 <!-- MenuController as ctrl -->
 
-<div layout="row" class="menu" layout-align="space-between">
+<md-toolbar class="md-primary md-hue-4">
+    <div class="md-toolbar-tools">
+        <h3 class="md-subhead md-margin">NORDIC GAME JAM 2016</h3>
 
-    <div>
-        <md-button ng-href="#/tickets">Tickets</md-button>
-        <!--<md-button ng-href="#/schedule">Schedule</md-button>-->
-    </div>
+        <md-button ng-href="#/tickets">Get Tickets</md-button>
 
-    <div ng-if="!ctrl.isLoggedIn">
-        <md-button ng-href="#/login" ng-if="!ctrl.isLoggedIn"
-                   class="md-accent">Log in</md-button>
+        <span class="flex"></span>
+
+        <md-button ng-href="#/login" ng-show="!ctrl.isLoggedIn" class="md-accent">Log in</md-button>
+        
+        <md-button ng-href="#/metrics" ng-show="ctrl.isAdmin" class="md-accent">admin stuff</md-button>
+        <md-button ng-href="#/me" ng-show="ctrl.isLoggedIn">my tickets</md-button>
+        <md-button ng-href="#/login" ng-show="ctrl.isLoggedIn" ng-click="ctrl.logout()">Log out</md-button>
     </div>
-    <div ng-if="ctrl.isLoggedIn">
-        <md-button ng-href="#/metrics" ng-if="ctrl.isAdmin" class="md-accent">admin stuff</md-button>
-        <md-button ng-href="#/me">my tickets</md-button>
-        <md-button ng-href="#/login" ng-click="ctrl.logout()">Log out</md-button>
-    </div>
-</div>
+</md-toolbar>
 
