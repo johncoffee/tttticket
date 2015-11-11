@@ -3,6 +3,7 @@ angular
         'ngMaterial',
         'googlechart',
         'ngRoute',
+        'ja.qr',
     ]);
 
 angular

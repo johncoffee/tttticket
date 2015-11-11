@@ -9,6 +9,6 @@
     "angular-material": "^0.11.3",
     "angular-route": "^1.4.x",
     "angular-google-chart": "~0.0.11",
-    "taffydb": "*"
+    "angular-qr": "~0.2.0"
   }
 }

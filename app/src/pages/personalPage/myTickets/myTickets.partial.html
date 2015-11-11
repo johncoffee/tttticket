@@ -9,17 +9,21 @@
     
     
     <md-grid-tile ng-repeat="ticket in ctrl.tickets"
-                  style="background: #8a3cff"
+                  style="background: #2f4980"
                   md-rowspan="1" 
                   md-colspan="1">
         <md-grid-tile-header>
             <h3 class="md-headline" ng-bind="::ticket.name" style="white-space: nowrap;"></h3>
         </md-grid-tile-header>
         
-        <div ng-show="ticket.qr">[QR code here]</div>
+        <div ng-if="ticket.qr">
+            <qr type-number="8" 
+                size="250"
+                text="'test'" 
+                image="false"></qr>
+        </div>
         
-        <md-grid-tile-footer>
-            <md-button>sell it</md-button>
+        <md-grid-tile-footer layout layout-align="end center">
             <md-button ng-click="ctrl.showQR(ticket)">QR code</md-button>
         </md-grid-tile-footer>
             
