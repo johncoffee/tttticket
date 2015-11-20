@@ -88,9 +88,9 @@ function {{directiveName}}Directive($log) {\n\
         },\n\
         restrict: "E",\n\
         controller: "{{controllerName}}",\n\
-        controllerAs: "ctrl",\n\
+        controllerAs: "vm",\n\
         templateUrl: "{{templatePath}}",\n\
-        link: function (scope, element, attrs, controller) {\n\
+        //link: function (scope, element, attrs, controller) {\n\
         //    if (!scope.companyDetails) {\n\
         //        $log.debug("missing companyDetails - did you forget?");\n\
         //    }\n\
@@ -103,7 +103,7 @@ function {{directiveName}}Directive($log) {\n\
         //        }\n\
         //    });\n\
         //    controller.setEnabled(scope.$eval(attrs.isEnabled));\n\
-        },\n\
+        //},\n\
     };\n\
 }\n\
 \n\
@@ -111,7 +111,7 @@ function {{directiveName}}Directive($log) {\n\
 angular.module("app").directive("{{companyNameSpace}}{{directiveName}}", {{directiveName}}Directive);\n\
 ';
 
-var partialTpl = '<!-- {{controllerName}} as ctrl -->\n\
+var partialTpl = '<!-- {{controllerName}} as vm -->\n\
 \n\
 <div>\n\
 </div>\n\
