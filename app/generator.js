@@ -56,6 +56,7 @@ var partialNameFile = inputName + ".partial.html";
 // templates
 
 var controllerTpl = 'function {{controllerName}}($log) {\n\
+    var vm = this;\n\
 \n\
 }\n\
 \n\
