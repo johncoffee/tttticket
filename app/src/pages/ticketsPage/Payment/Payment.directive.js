@@ -11,7 +11,7 @@ function PaymentDirective($log) {
         link: function (scope, element, attrs, controller) {
             scope.$watch('ticket', function (newValue) {
                 if (newValue) {
-                    controller.setTicket(newValue);
+                    controller.startCheckout(newValue);
                 }
             });
             

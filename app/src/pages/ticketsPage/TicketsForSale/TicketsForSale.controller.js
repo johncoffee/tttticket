@@ -7,7 +7,7 @@ function TicketsForSaleController($log, $q, $scope, $http, Shop) {
     };
 
     this.getTickets = function (type) {
-        Shop.getTickets(type).then(function (tickets) {
+        Shop.getAll(type).then(function (tickets) {
             for (var i in  tickets) {
                 var ticketVO = tickets[i];
                 vm.tickets[i] = {

@@ -149,27 +149,18 @@ function PaymentController(CurrentUser,
         });
     };
     
-    this.setTicket = function (shopItemID) {
-        Shop.getTickets().then(function (shopItems) {
-            console.debug(shopItems, shopItemID);
-            var ticketData = null;
-
-            for (var i in shopItems) {
-                if (shopItems[i].id == shopItemID) {
-                    ticketData = shopItems[i];
-                    break;
-                }
-            }
-            vm.buyTicket = {
-                shopItemID: ticketData.shopItemID,
-                price: ticketData.price_currency + ' ' + ticketData.price_amount,
-                title: ticketData.title,
-                ticketType: ticketData.ticket_type,
-            };
-        });
+    this.startCheckout = function (shopItemID) {
         vm.buyTicket = {
             wait: true,
         };
+        Shop.getShopItem(shopItemID).then(function (shopItem) {
+            vm.buyTicket = {
+                shopItemID: shopItem.shopItemID,
+                price: shopItem.price_currency + ' ' + shopItem.price_amount,
+                title: shopItem.title,
+                ticketType: shopItem.ticket_type,
+            };
+        });
     };
 }
 
