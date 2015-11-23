@@ -19,7 +19,7 @@
         <div ng-if="ticket.qr">
             <qr type-number="8" 
                 size="250"
-                text="'test'" 
+                text="ticket.addressPrivateWIP ? ticket.addressPrivateWIP : 'test'" 
                 image="false"></qr>
         </div>
         

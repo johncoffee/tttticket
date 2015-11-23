@@ -37,6 +37,21 @@ function MyTickets($q, Auth, $http) {
         return deferred.promise;
     };
     
+    this.fetchAssetInfo = function() {
+        return $http({
+            url: "/api/ticket_type.php",
+            method: "GET",
+            cache: true,
+            responseType: "json",
+        }).then(function(result) {
+            var map = {};
+            angular.forEach(result.data, function(item) {
+                map[item.asset_id] = item;
+            });
+            return map;
+        });
+    };
+
     this.getMyTickets = function (address) {
         var deferred = $q.defer();
         var tickets = [];
@@ -51,8 +66,8 @@ function MyTickets($q, Auth, $http) {
         .then(function (response) {
             angular.forEach(response.data.assets, function (asset) {
                 for (var i = 0; i < asset.amount; i++) {
-                    tickets.push(new Ticket(Math.random(), {
-                        name: asset.assetId,
+                    tickets.push(new Ticket(null, {
+                        assetID: asset.assetId, 
                     }));
                 }
             });
@@ -68,13 +83,16 @@ function MyTickets($q, Auth, $http) {
 
 function Ticket(id, data) {
     this.id = id;
+    this.name = null;
     if (data) {
         this.hydrate(data);
     }
 }
 
 Ticket.prototype.hydrate = function (data) {
-    for (var i in data) if (data.hasOwnProperty(i)) {
+    for (var i in data) 
+        //if (this.hasOwnProperty(i)) 
+    {
         this[i] = data[i];    
     }    
 };
