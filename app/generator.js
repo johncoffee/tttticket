@@ -33,14 +33,12 @@ function generate() {
     var files = [
         controllerNameFile,
         directiveNameFile,
-        //serviceNameFile,
         partialNameFile,
     ];
 
 //    insertLines();
 
-    var currentError = null;
-    currentError = writeFiles(files);
+    var currentError = writeFiles(files);
     if (currentError) {
         console.error("Failed ", currentError);
     }
@@ -53,8 +51,6 @@ var controllerName = ucFirst(inputName + "Controller");
 var directiveNameFile = inputName + ".directive.js";
 var directiveName = ucFirst(inputName);
 var ndDirectiveName = hyphenate(inputName);
-var serviceNameFile = inputName + "Data.factory.js";
-var serviceName = ucFirst(inputName) + "Service";
 var partialNameFile = inputName + ".partial.html";
 
 // templates
@@ -64,20 +60,6 @@ var controllerTpl = 'function {{controllerName}}($log) {\n\
 }\n\
 \n\
 angular.module("app").controller("{{controllerName}}", {{controllerName}});\n\
-';
-
-var serviceTpl = '\n\
-function {{serviceName}}Factory($log) {\n\
-    \n\
-    function method() {\n\
-    }\n\
-    \n\
-    return {\n\
-        \n\
-    };\n\
-}\n\
-\n\
-angular.module("app").factory("{{serviceName}}", {{serviceName}}Factory);\n\
 ';
 
 var directiveTpl = '\n\
@@ -127,21 +109,6 @@ if (!program.component) {
     console.log("See --help on how to specify name and path for your component.");
 }
 
-// business
-
-function insertLines() {
-    console.log("Insert these lines somewhere:");
-    var pathOfGenerateScript = __dirname.replace( __dirname.indexOf('nexus-frontend') ); // https://nodejs.org/docs/latest/api/globals.html#globals_dirname
-    files.forEach(function(file) {
-        var isJsFile = (file.indexOf(".js") > -1);
-        if (isJsFile) {
-            var tpl = 'require("$1/$2/$3")(ngModule);'.replace('$1', pathOfGenerateScript)
-                .replace('$2', inputName )
-                .replace('$3', file.replace('.js', ''));
-            console.log(tpl);
-        }
-    });
-}
 
 function writeFiles (files) {
     var currentError = null;
@@ -166,9 +133,6 @@ function writeFiles (files) {
             if (filename.indexOf("controller") > -1) {
                 contents = controllerTpl;
             }
-            else if (filename.indexOf("factory") > -1) {
-                contents = serviceTpl;
-            }
             else if (filename.indexOf("directive") > -1) {
                 templatePath = path + '/' + filename;
                 templatePath = templatePath.replace(/\/\//g, "/");
@@ -185,7 +149,6 @@ function writeFiles (files) {
             path = path.replace(/\/\//g, "/");
 
             contents = contents
-                .replace(/\{\{serviceName}}/gi, serviceName)
                 .replace(/\{\{controllerName}}/gi, controllerName)
                 .replace(/\{\{directiveName}}/gi, directiveName)
                 .replace(/\{\{ndDirectiveName}}/gi, ndDirectiveName)
