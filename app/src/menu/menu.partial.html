@@ -12,6 +12,7 @@
 
         <md-button ng-href="#/login" ng-show="!ctrl.isLoggedIn" class="md-accent">Log in</md-button>
         
+        <md-button ng-href="#/metrics" ng-show="ctrl.isAdmin" class="md-accent">check-in</md-button>
         <md-button ng-href="#/metrics" ng-show="ctrl.isAdmin" class="md-accent">admin stuff</md-button>
         <md-button ng-href="#/me" ng-show="ctrl.isLoggedIn">my tickets</md-button>
         <md-button ng-href="#/login" ng-show="ctrl.isLoggedIn" ng-click="ctrl.logout()">Log out</md-button>

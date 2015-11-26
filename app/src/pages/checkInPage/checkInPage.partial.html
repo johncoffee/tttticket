@@ -1,0 +1,12 @@
+<!-- CheckInPageController as vm -->
+
+<md-button ng-click="vm.valid = false" ng-disabled="!vm.valid">Clear</md-button>
+<!--<md-button ng-click="vm.input = 'cVfgitWwFZSiD4M5W6ULJiytSnYr7WrHPMjUTps8MokP471kKvUd'; vm.valid = true;">Test</md-button>-->
+
+<ngj-simple-scanner on-found-wip="vm.input = privateWip; vm.valid = true;" ng-show="!vm.valid"></ngj-simple-scanner>
+
+<div ng-if="vm.valid">
+    <h3>Private WIP</h3>
+    <input ng-model="vm.input" placeholder="address wip" size="64"><br>
+    <ngj-private-wip-lookup private-wip="{{vm.input}}"></ngj-private-wip-lookup>
+</div>

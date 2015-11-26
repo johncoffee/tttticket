@@ -4,6 +4,7 @@ angular
         'googlechart',
         'ngRoute',
         'ja.qr',
+        'qrScanner',
     ]);
 
 angular

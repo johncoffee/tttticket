@@ -12,6 +12,7 @@ var css = [
 var js = [
     // vendor (not picked up by mainBowerFiles)
     //"./app/bower_components/taffydb/taffy.js",
+    "./app/bower_components/angular-qr-scanner/src/jsqrcode-combined.min.js",
     
     // our stuff
     './app/src/**/*.js',

@@ -1,0 +1,9 @@
+<!-- PrivateWipLookupController as vm -->
+
+<div>
+    <h3>Result</h3>
+    <pre ng-bind="vm.info | json:2"></pre>
+    
+    <h4>Options</h4>
+    <md-button ng-disabled="!vm.info" ng-click="vm.plunder(vm.userID, vm.ticketID);">Plunder</md-button>
+</div>
