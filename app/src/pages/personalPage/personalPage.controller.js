@@ -1,4 +1,4 @@
-function PersonalPageController($log, MyTickets) {
+function PersonalPageController($log, AssetInfo) {
     var vm = this;
     vm.addresses = [];
     
@@ -7,7 +7,7 @@ function PersonalPageController($log, MyTickets) {
         console.debug(vm.addresses);
     };
     
-    MyTickets.getMyAddresses().then(function (addresses) {
+    AssetInfo.getMyAddresses().then(function (addresses) {
         angular.forEach(addresses, function (item) {
            vm.addAddress(item.address); 
         });

@@ -1,4 +1,4 @@
-function MyTicketsController($log, $q, MyTickets) {
+function MyTicketsController($log, $q, AssetInfo) {
     var tickets = [];
     this.tickets = tickets;
     
@@ -6,8 +6,8 @@ function MyTicketsController($log, $q, MyTickets) {
         tickets.length = 0;
         
         $q.all([
-            MyTickets.fetchAssetInfo(),
-            MyTickets.getTicketsForAddresses(addresses),
+            AssetInfo.fetchTicketTypes(),
+            AssetInfo.getTicketsForAddresses(addresses),
         ]).then(function (results) {
             var ticketTypes = results[0];
             var myTickets = results[1];
