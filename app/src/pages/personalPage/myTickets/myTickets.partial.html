@@ -16,12 +16,15 @@
             <h3 class="md-headline" ng-bind="::ticket.name" style="white-space: nowrap;"></h3>
         </md-grid-tile-header>
         
-        <div ng-if="ticket.qr">
+        <div ng-if="ticket.qr && ticket.addressPrivateWIP">
             <qr type-number="8" 
                 size="250"
-                text="ticket.addressPrivateWIP ? ticket.addressPrivateWIP : 'test'" 
+                text="ticket.addressPrivateWIP" 
                 image="false"></qr>
         </div>
+        <div ng-if="ticket.qr && !ticket.addressPrivateWIP">
+            [private wip]
+        </div>   
         
         <md-grid-tile-footer layout layout-align="end center">
             <md-button ng-click="ctrl.showQR(ticket)">QR code</md-button>
