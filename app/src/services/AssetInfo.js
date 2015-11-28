@@ -13,11 +13,10 @@ function AssetInfo($q, Auth, $http) {
         });
 
         $q.all(promises).then(function (results) {
-
             var assets = [];
-            for (var i in results) {
-                assets = assets.concat(results[i]);
-            }
+            angular.forEach(results, function (result) {
+                assets = assets.concat(result);
+            });     
             deferred.resolve(assets);
         }, function (rejects) {
             console.warn(rejects);
