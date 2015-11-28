@@ -33,7 +33,7 @@ Object.defineProperties(Auth.prototype, {
                 this.destroySession();
             }
             else {
-                this.user.roles.authenticated = value;
+                this.user.roles.authenticated = true;
                 this.persistState();
             }
         },

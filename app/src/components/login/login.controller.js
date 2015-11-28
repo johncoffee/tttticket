@@ -16,7 +16,8 @@ function LoginController($log, $http, Auth, $location) {
         })
         .then(function (response) {
             if (response.data.loggedin) {
-                Auth.authenticated = response.data.loggedin;
+                Auth.authenticated = true;
+                Auth.user.id = response.data.loggedin;
                 Auth.admin = response.data.admin;
                 $location.path("/me");
             }
