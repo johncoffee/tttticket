@@ -1,4 +1,4 @@
-function PersonalPageController($log, AssetInfo) {
+function PersonalPageController($log, AssetInfo, CurrentUser) {
     var vm = this;
     vm.addresses = [];
     
@@ -7,11 +7,10 @@ function PersonalPageController($log, AssetInfo) {
         console.debug(vm.addresses);
     };
     
-    AssetInfo.getMyAddresses().then(function (addresses) {
+    AssetInfo.getMyAddresses(CurrentUser.getID()).then(function (addresses) {
         angular.forEach(addresses, function (item) {
            vm.addAddress(item.address); 
         });
-        console.log(vm.addresses)
     });
 }
 
