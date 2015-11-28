@@ -68,14 +68,7 @@ function User() {
 }
 
 User.prototype.serialize = function () {
-    var result = null;
-    try {
-        result = JSON.stringify(this);
-    }
-    catch (e) {
-        console.warn(e);
-    }
-    return result;
+    return JSON.stringify(this);
 };
 
 angular.module('app').service('Auth', Auth);
