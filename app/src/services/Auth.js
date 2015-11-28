@@ -10,6 +10,7 @@ function Auth() {
         try {
             var recovered = JSON.parse(this.storage[this.localStorageKey]);
             this.user.roles = recovered.roles;
+            this.user.id = recovered.id;
         }
         catch (e) {
             console.warn(e);
