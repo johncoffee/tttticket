@@ -13,11 +13,17 @@ function AssetInfo($q, Auth, $http) {
         });
 
         $q.all(promises).then(function (results) {
-            var assets = [];
-            angular.forEach(results, function (result) {
-                assets = assets.concat(result);
+            var map = {};
+            
+            angular.forEach(results, function (tickets, addressPubKey) {
+                angular.forEach(tickets, function (ticket) {
+                    if (!map[ticket.address]) {
+                        map[ticket.address] = [];
+                    }
+                    map[ticket.address].push(ticket);
+                });
             });     
-            deferred.resolve(assets);
+            deferred.resolve(map);
         }, function (rejects) {
             console.warn(rejects);
             deferred.reject();
@@ -30,18 +36,18 @@ function AssetInfo($q, Auth, $http) {
         var deferred = $q.defer();
         var tickets = [];
         $http({
-            method: "POST",
-            data: {
+            method: "GET",
+            params: {
                 address: address,
             },
-            url: "/api/cc_addressinfo.php?address=" + address, // cache pr. URL I think
-            cache: false,
+            url: "/api/cc_addressinfo.php",
         })
         .then(function (response) {
             angular.forEach(response.data.assets, function (asset) {
                 for (var i = 0; i < asset.amount; i++) {
                     tickets.push({
                         assetID: asset.assetId,
+                        address: address,
                     });
                 }
             });
@@ -73,13 +79,17 @@ function AssetInfo($q, Auth, $http) {
         $http({
             url: "/api/addresses.php",
             method: "GET",
-            cache: true,
+            cache: false,
             responseType: "json",
             params: {
                 userID: userID,
             }
         }).then(function (response) {
-            deferred.resolve(response.data.addresses);
+            var map = {};
+            angular.forEach(response.data.addresses, function(address) {
+                map[address.address] = address; 
+            });
+            deferred.resolve(map);
         });
 
         return deferred.promise;

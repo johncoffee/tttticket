@@ -16,13 +16,13 @@
             <h3 class="md-headline" ng-bind="::ticket.name" style="white-space: nowrap;"></h3>
         </md-grid-tile-header>
         
-        <div ng-if="ticket.qr && ticket.addressPrivateWIP">
+        <div ng-if="ticket.qr && ticket.privateWip">
             <qr type-number="8" 
                 size="250"
-                text="ticket.addressPrivateWIP" 
+                text="ticket.privateWip" 
                 image="false"></qr>
         </div>
-        <div ng-if="ticket.qr && !ticket.addressPrivateWIP">
+        <div ng-if="ticket.qr && !ticket.privateWip">
             [private wip]
         </div>   
         
