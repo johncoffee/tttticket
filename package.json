@@ -1,30 +1,25 @@
 {
-  "name": "material-start",
-  "private": true,
-  "version": "0.0.3",
-  "description": "A starter project for AngularJS Material",
-  "repository": "https://github.com/angular/material-start",
-  "license": "MIT",
+  "name": "tttt-material",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {},
   "devDependencies": {
-    "bower": "^1.3.1",
-    "commander": "^2.8.1",
     "gulp": "^3.9.0",
     "gulp-angular-templatecache": "^1.8.0",
+    "gulp-concat": "^2.6.0",
     "gulp-filter": "^3.0.1",
     "gulp-inject": "^3.0.0",
-    "gulp-ng-annotate": "^1.1.0",
     "gulp-watch": "^4.3.5",
-    "http-server": "^0.6.1",
-    "karma": "~0.10",
-    "karma-junit-reporter": "^0.2.2",
-    "main-bower-files": "^2.9.0",
-    "protractor": "^2.0.0",
-    "selenium-webdriver": "^2.45.1",
-    "shelljs": "^0.2.6"
+    "main-bower-files": "^2.9.0"
   },
   "scripts": {
-    "start": "cd app/; http-server --cors -p 8000 -a localhost -c-1",
-    "postinstall": "bower update",
-    "test": "protractor ./e2e/protractor.conf.js"
-  }
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johncoffee/tttticket.git"
+  },
+  "author": "julian",
+  "license": "UNLICENSED"
 }
