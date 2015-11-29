@@ -4,7 +4,6 @@ function PersonalPageController($log, AssetInfo, CurrentUser) {
     
     vm.addAddress = function (address) {
         vm.addresses.push(address);            
-        console.debug(vm.addresses);
     };
     
     AssetInfo.getMyAddresses(CurrentUser.getID()).then(function (addresses) {
