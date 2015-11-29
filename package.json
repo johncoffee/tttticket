@@ -20,6 +20,9 @@
     "type": "git",
     "url": "git+https://github.com/johncoffee/tttticket.git"
   },
+  "engines": {
+    "node": "5.1.0"
+  },
   "author": "julian",
   "license": "UNLICENSED"
 }
