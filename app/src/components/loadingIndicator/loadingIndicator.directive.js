@@ -7,10 +7,19 @@ function LoadingIndicatorDirective($log) {
         restrict: "E",
         templateUrl: "src/components/loadingIndicator/loadingIndicator.partial.html",
         link: function (scope, element, attrs, controller) {
+            var loadingCount = 0;
             scope.isLoading = false;
             scope.$on("loading", function (type, payload) {
-                console.log("loading",payload, type);
-                scope.isLoading = payload;
+                if (payload) {
+                    loadingCount++;
+                }
+                else if (!payload && loadingCount > 0) {
+                    loadingCount--;
+                }
+                else {
+                    $log.warn("Someone forgot to emit loading. Count: " + loadingCount);
+                }
+                scope.isLoading = (loadingCount > 0);
             });
         },
     };
