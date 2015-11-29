@@ -1,5 +1,9 @@
 <!-- SimpleScannerController as vm -->
 
-<div>
-    <qr-scanner width="400" height="300" ng-success="vm.onSuccess(data)" ng-error="vm.onError(error)"></qr-scanner>
+<div ng-init="errors = ''">
+    <qr-scanner width="400" height="300"
+                ng-success="vm.onSuccess(data)" 
+                ng-error="vm.onError(error); errors = error + '\n' + errors"></qr-scanner>
+    
+    <pre ng-bind="errors"></pre>
 </div>
