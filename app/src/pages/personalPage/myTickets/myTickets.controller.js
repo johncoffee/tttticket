@@ -1,10 +1,12 @@
-function MyTicketsController($log, $q, AssetInfo, CurrentUser) {
+function MyTicketsController($scope, $q, AssetInfo, CurrentUser) {
     var tickets = [];
     this.tickets = tickets;
     
     this.fetchFromAddresses = function (addresses) {
         tickets.length = 0;
-        
+
+        $scope.$emit("loading", true);
+
         $q.all([
             AssetInfo.fetchTicketTypes(),
             AssetInfo.getTicketsForAddresses(addresses),
@@ -30,6 +32,9 @@ function MyTicketsController($log, $q, AssetInfo, CurrentUser) {
         },
         function(reasons) {
             console.warn(reasons);
+        })
+        .finally(function () {
+            $scope.$emit("loading", false);
         });
     };
 

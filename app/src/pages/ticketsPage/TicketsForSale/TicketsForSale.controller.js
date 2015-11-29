@@ -1,4 +1,4 @@
-function TicketsForSaleController($log, $q, $scope, $http, Shop) {
+function TicketsForSaleController($scope, $q, $scope, $http, Shop) {
     var vm = this;
     vm.tickets = [];
     
@@ -7,6 +7,8 @@ function TicketsForSaleController($log, $q, $scope, $http, Shop) {
     };
 
     this.getTickets = function (type) {
+        $scope.$emit('isLoading',true);
+        
         Shop.getAll(type).then(function (tickets) {
             for (var i in  tickets) {
                 var ticketVO = tickets[i];
@@ -16,6 +18,9 @@ function TicketsForSaleController($log, $q, $scope, $http, Shop) {
                     price: ticketVO.price_currency + " " + ticketVO.price_amount,
                 };
             }
+        })
+        .finally(function () {
+            $scope.$emit('isLoading', false);
         });
     };
 }
