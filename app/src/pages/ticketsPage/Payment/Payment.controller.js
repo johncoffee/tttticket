@@ -1,8 +1,7 @@
 function PaymentController(CurrentUser,
                            Auth,
                            $http,
-                           Shop,
-                           $window) {
+                           Shop) {
     
     var vm = this;
     vm.showSignUp = CurrentUser.isAuthenticated();
@@ -10,10 +9,6 @@ function PaymentController(CurrentUser,
     vm.buyTicket = null; // the object to hold the state
     this.step = 0;
     this.method = false;
-    
-    this.print = function() {
-        $window.print();
-    };
     
     this.signUp = function(email, password) {
         vm.buyTicket.wait = true;
