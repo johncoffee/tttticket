@@ -67,6 +67,38 @@
 
     <md-tab ng-disabled="false">
         <md-tab-label>
+            Extra information
+        </md-tab-label>
+        <md-tab-body>
+                
+            <h4 class="md-headline">Please supply following information</h4>
+            <form name="userForm" layout layout-sm="column">
+                
+                <md-input-container flex>
+                    <label>T-shirt cut</label>
+                    <md-select ng-model="ctrl.buyTicket.extra.tshirt_cut">
+                        <md-option ng-repeat="sizes in [{abbrev: 'Male'}, {abbrev: 'Female'}] track by $index" value="{{sizes.abbrev}}">
+                            {{sizes.abbrev}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label>T-shirt size</label>
+                    <md-select ng-model="ctrl.buyTicket.extra.tshirt_size">
+                        <md-option ng-repeat="sizes in [{abbrev: 'S'}, {abbrev: 'M'}, {abbrev: 'L'}, {abbrev: 'XL'}] track by $index" value="{{sizes.abbrev}}">
+                            {{sizes.abbrev}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                
+            </form>
+
+        </md-tab-body>
+    </md-tab>
+    
+    <md-tab ng-disabled="false">
+        <md-tab-label>
             How would you like to pay?
         </md-tab-label>
         <md-tab-body>
