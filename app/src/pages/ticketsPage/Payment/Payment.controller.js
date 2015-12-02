@@ -83,6 +83,7 @@ function PaymentController(CurrentUser,
             data: {
                 ticketTypeID: ticketTypeID,
                 code: code,
+                extra: vm.buyTicket.extra,
             },
             cache: false,
             responseType: "application/json",

@@ -72,26 +72,41 @@
         <md-tab-body>
                 
             <h4 class="md-headline">Please supply following information</h4>
-            <form name="userForm" layout layout-sm="column">
+            <form name="userForm" layout="column">
                 
                 <md-input-container flex>
-                    <label>T-shirt cut</label>
-                    <md-select ng-model="ctrl.buyTicket.extra.tshirt_cut">
-                        <md-option ng-repeat="sizes in [{abbrev: 'Male'}, {abbrev: 'Female'}] track by $index" value="{{sizes.abbrev}}">
-                            {{sizes.abbrev}}
+                    <label>T-shirt size</label>
+                    <md-select ng-model="ctrl.buyTicket.extra.tshirt_size">
+                        <md-option ng-repeat="size in [
+                             {abbrev: 'Male S'}, {abbrev: 'Male M'}, {abbrev: 'Male L'}, {abbrev: 'Male XXL'},
+                             {abbrev: 'Female S'}, {abbrev: 'Female M'}, {abbrev: 'Female L'}, {abbrev: 'Female XL'},
+                        ] track by $index"
+                           value="{{size.abbrev}}" 
+                           ng-bind="size.abbrev">
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                
+                <md-input-container class="md-block">
+                    <label>Where do you study?</label>
+                    <md-select ng-model="ctrl.buyTicket.extra.where_do_you_study">
+                        <md-option ng-repeat="name in ['ITU', 'AAU', 'Not student', 'Other University'] track by $index"
+                                   value="{{name}}"
+                                   ng-bind="name">
                         </md-option>
                     </md-select>
                 </md-input-container>
 
-                <md-input-container flex>
-                    <label>T-shirt size</label>
-                    <md-select ng-model="ctrl.buyTicket.extra.tshirt_size">
-                        <md-option ng-repeat="sizes in [{abbrev: 'S'}, {abbrev: 'M'}, {abbrev: 'L'}, {abbrev: 'XL'}] track by $index" value="{{sizes.abbrev}}">
-                            {{sizes.abbrev}}
-                        </md-option>
-                    </md-select>
+                <md-input-container class="md-block">
+                    <label>What do you do for living?</label>
+                    <input ng-model="ctrl.buyTicket.extra.do_for_living">
                 </md-input-container>
-                
+
+                <md-input-container class="md-block">
+                    <label>Special food requests / allergies / etc.</label>
+                    <textarea ng-model="ctrl.buyTicket.food_requests" columns="1" md-maxlength="200" rows="2"></textarea>
+                </md-input-container>
+
             </form>
 
         </md-tab-body>
