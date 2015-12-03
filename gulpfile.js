@@ -5,6 +5,7 @@ var gulpFilter = require('gulp-filter');
 var watch = require('gulp-watch');
 var mainBowerFiles = require('main-bower-files');
 var templateCache = require('gulp-angular-templatecache');
+var karmaServer = require('karma').Server;
 
 var css = [
     "./app/assets/**/*.css",
@@ -80,6 +81,14 @@ function prodBuild() {
 gulp.task('build', function(){
     console.log("Production build");
     return prodBuild();
+});
+
+gulp.task('test', function(done) {
+    new karmaServer({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true,
+        urlRoot: "/app/",
+    }, done).start();
 });
 
 gulp.task('default', function(){

@@ -10,6 +10,7 @@
     "angular-route": "^1.4.x",
     "angular-google-chart": "~0.0.11",
     "angular-qr": "~0.2.0",
-    "angular-qr-scanner": "~0.1.0"
+    "angular-qr-scanner": "~0.1.0",
+    "angular-mocks": "~1.4.8"
   }
 }

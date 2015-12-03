@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "gulpfile.js",
-  "dependencies": {},
+  "dependencies": {
+    "jasmine": "^2.4.0",
+    "jasmine-core": "^2.4.0",
+    "karma": "^0.13.15",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-jasmine": "^0.3.6"
+  },
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-angular-templatecache": "^1.8.0",
