@@ -24,7 +24,7 @@ function MyTicketsController($scope, $q, AssetInfo, CurrentUser) {
                         t.name = ticketTypes[ticket.assetID].name;
                     }
                     if (myAddresses[ticket.address]) {
-                        t.qrText = "http://localhost/api/checkin.php?ticket_id=" + myAddresses[ticket.address].ticket_id;
+                        t.qrText = "api/checkin.php?ticket_id=" + myAddresses[ticket.address].ticket_id;
                     }
                     tickets.push(t);
                 });

@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "gulpfile.js",
-  "dependencies": {},
+  "dependencies": {
+    "cors": "^2.7.1",
+    "express": "^4.13.3",
+    "jwt-simple": "^0.4.0",
+    "path": "^0.12.7",
+    "request": "^2.67.0"
+  },
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-angular-templatecache": "^1.8.0",
@@ -14,6 +20,7 @@
     "main-bower-files": "^2.9.0"
   },
   "scripts": {
+    "start": "node ./server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
