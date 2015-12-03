@@ -1,9 +1,13 @@
 var express = require('express');
 var request = require('request');
+//var cors = request("cors");
+
 var app = express();
 
 var staticPath = __dirname + "/../app/";
-var apiHost = "localhost:8000";
+var apiHost = "http://localhost:8000";
+
+//app.use(cors());
 
 // set request defaults
 request = request.defaults({
@@ -15,12 +19,6 @@ process.on('uncaughtException', function(err) {
     console.log(err);
 });
 
-app.all('/*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next();
-});
-
 app.use("/", express.static(staticPath, {
     etag: false,
 }) );
@@ -28,11 +26,12 @@ app.use("/", express.static(staticPath, {
 app.all('/api/*', pipeApiRequest);
 
 function pipeApiRequest(req, res) {
-    var target = req.protocol + '://' + apiHost + req.url;
+    var target = apiHost + req.url;
     //console.log('piping request to:' + target);
     var options = {
-        url: target
+        url: target,
     };
+    res.contentType('json');
     req.pipe(request(options)).pipe(res);
 }
 
