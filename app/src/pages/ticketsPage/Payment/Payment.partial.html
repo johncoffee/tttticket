@@ -41,10 +41,13 @@
                 <h1 class="md-display-1">Sign up</h1>
                 <p class="md-accent">Create a login, so you can retrieve your tickets whenever you need then.</p>
 
-                <div layout layout-sm="column" layout-align="space-around">
+                <form name="userForm" layout layout-sm="column" layout-align="space-around">
                     <md-input-container flex>
                         <label>Email</label>
-                        <input ng-model="ctrl.buyTicket.email" type="email">
+                        <input ng-model="ctrl.buyTicket.email" name="email" required type="email">
+                        <div ng-messages="userForm.email.$error" ng-show="userForm.email.$dirty">
+                            <div ng-message="required">E-mail is required.</div>
+                        </div>
                     </md-input-container>
                     <md-input-container flex>
                         <label>Password</label>
@@ -54,10 +57,10 @@
                         <label>Password (again)</label>
                         <input ng-model="ctrl.buyTicket.password2" type="password">
                     </md-input-container>
-                </div>
+                </form>
 
                 <div class="md-margin layout-align-center-center layout-row" style="height: 65px">
-                    <md-button ng-disabled="ctrl.buyTicket.password != ctrl.buyTicket.password2"
+                    <md-button ng-disabled="!ctrl.buyTicket.email || !ctrl.buyTicket.password || (ctrl.buyTicket.password != ctrl.buyTicket.password2)"
                                 ng-click="ctrl.signUp(ctrl.buyTicket.email, ctrl.buyTicket.password);"
                                class="md-raised">Next</md-button>
                 </div>
