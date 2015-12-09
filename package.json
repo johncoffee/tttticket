@@ -4,10 +4,7 @@
   "description": "",
   "main": "gulpfile.js",
   "dependencies": {
-    "cors": "^2.7.1",
     "express": "^4.13.3",
-    "jwt-simple": "^0.4.0",
-    "path": "^0.12.7",
     "request": "^2.67.0"
   },
   "devDependencies": {
