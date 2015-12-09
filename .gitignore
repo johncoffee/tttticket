@@ -9,3 +9,4 @@ app/jspm_packages/
 /config.json
 [Bb]uild/
 app/api
+npm-debug.log
