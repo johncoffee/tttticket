@@ -2,22 +2,29 @@ var express = require('express');
 var request = require('request');
 //var cors = request("cors");
 
-var app = express();
-
-var staticPath = __dirname + "/../app/";
+// settings
+var port = process.env.PORT || 3000;
+var staticPath = __dirname + "/../public/";
 var apiHost = "http://localhost:8000/";
 
-//app.use(cors());
-// set request defaults
-//request = request.defaults({
-    //jar: request.jar(),
-    //proxyHeaderWhiteList: ['Access-Control-Allow-Origin', 'Cookie']
-//});
 
-process.on('uncaughtException', function(err) {
-    console.log(err);
+var app = express();
+
+app.all('/api/*', function(req, res) {
+    var matches = req.url.match(/api\/(.+)$/);
+    if (matches && matches[1]) {
+        var path = matches[1];
+        var options = {
+            url: apiHost + path,
+        };
+
+        req.pipe(request(options)).pipe(res);    
+    }
+    else {
+        res.statusCode = 404;  
+        res.end();
+    }
 });
-
 
 // static files
 
@@ -25,6 +32,6 @@ app.use("/", express.static(staticPath, {
     etag: false,
 }) );
 
-app.listen(3000, function() {
-    console.log('Serving on port 3000');
+app.listen(port, function() {
+    console.log('Serving on port '  + port);
 });
